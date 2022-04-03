@@ -1,6 +1,6 @@
 import styles from './login.module.css'
 import { useState , useContext} from 'react';
-import axios from '../../api/axios';
+import { axiosPrivate } from '../../api/axios';
 import ErrorMsg from '../reusable-components/errors/ErrorMsg'
 import AuthContext from '../../context/AuthProvider';
 import { Link } from 'react-router-dom';
@@ -21,7 +21,8 @@ const LoginPage = () => {
         const body = {email,password}
         console.log(body)
         try{
-            const loginUser = await axios.post('/users/login',body)
+            
+            const loginUser = await axiosPrivate.post('/users/login',body)
             console.log(loginUser)
             setPending(false)
             const accessToken = loginUser?.data?.accessToken

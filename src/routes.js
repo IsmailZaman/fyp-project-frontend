@@ -1,6 +1,7 @@
 import {Route, Routes} from 'react-router-dom'
 import Dashboard from './components/Dashboard/Dashboard';
 import LoginPage from './components/login-page/LoginPage';
+import PersistLogin from './components/PersistLogin';
 import RequireAuth from './components/RequireAuth';
 import Unauthorized from './components/Unauthorized';
 
@@ -14,9 +15,13 @@ const AppRoutes = () => {
                     <Route exact path="/" element={<LoginPage />}/>
                     <Route exact path="/unauthorized" element= {<Unauthorized/>} />
 
-                    <Route element={<RequireAuth allowedRoles={['admin']}/>}>
-                        <Route exact path="/dashboard" element = {<Dashboard />} />
+                    {/*Private Routes */}
+                    <Route element={<PersistLogin />}>
+                        <Route element={<RequireAuth allowedRoles={['admin']}/>}>
+                            <Route exact path="/dashboard" element = {<Dashboard />} />
+                        </Route> 
                     </Route>
+
                 </Routes>
             
 
