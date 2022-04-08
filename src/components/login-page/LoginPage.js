@@ -4,6 +4,7 @@ import { axiosPrivate } from '../../api/axios';
 import ErrorMsg from '../reusable-components/errors/ErrorMsg'
 import AuthContext from '../../context/AuthProvider';
 import { Link } from 'react-router-dom';
+import Arfa from './Arfa.mp4';
 
 const LoginPage = () => {
     const {setAuth} = useContext(AuthContext)
@@ -55,10 +56,12 @@ const LoginPage = () => {
 
 
     return ( 
-
         <div className="container">
+            <video autoPlay loop muted id = 'video'>
+                <source src = {Arfa} type = 'video/mp4'/>
+            </video>
             <div className={styles.logo}></div>
-            <div className={styles.title}>TWITTER</div>
+            {/* <div className={styles.title}>WELCOME</div> */}
             <div className={styles.inputs}>
                 <form onSubmit={handleSubmit}>
                     <label>EMAIL</label>
