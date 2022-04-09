@@ -3,12 +3,13 @@ import { useState , useContext} from 'react';
 import { axiosPrivate } from '../../api/axios';
 import ErrorMsg from '../reusable-components/errors/ErrorMsg'
 import AuthContext from '../../context/AuthProvider';
-import { Link } from 'react-router-dom';
 import Arfa from './Arfa.mp4';
+import { Navigate, useLocation } from 'react-router-dom';
 
 const LoginPage = () => {
     const {setAuth} = useContext(AuthContext)
-    
+    const location = useLocation()
+
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [isPending, setPending] = useState(false)
@@ -31,6 +32,7 @@ const LoginPage = () => {
             const roles = loginUser?.data?.user.roles
 
             setAuth({email,password, user,accessToken, roles})
+            localStorage.setItem('isLoggedIn', true)
             setSuccess(true)
             
         }catch(e){
@@ -55,7 +57,7 @@ const LoginPage = () => {
 
 
 
-    return ( 
+    return ( !localStorage.getItem('isLoggedIn') ?
         <div className="container">
             <video autoPlay loop muted id = 'video'>
                 <source src = {Arfa} type = 'video/mp4'/>
@@ -80,10 +82,10 @@ const LoginPage = () => {
                     
                     <button type="submit">LOGIN</button>
                     {isPending && <p>Loading...</p>}
-                    {success && <Link to="/dashboard"><p>Dashboard</p></Link>}
+                    {success && <Navigate to ="/dashboard" state={{from: location}} replace/>}
                 </form>
             </div>
-        </div>
+        </div> : <Navigate to ="/dashboard" state={{from: location}} replace/>
 
      );
 }

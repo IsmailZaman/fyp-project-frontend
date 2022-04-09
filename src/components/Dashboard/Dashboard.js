@@ -1,36 +1,22 @@
-import useRefreshToken from "../../hooks/useRefreshToken";
-import useAxiosprivate from "../../hooks/useAxiosPrivate";
-import useLogout from "../../hooks/useLogout";
-
+import useAuth from "../../hooks/useAuth";
+import StudentDashboard from "./StudentDashboard";
+import AdminDashboard from "./AdminDashboard";
 
 
 
 const Dashboard = () => {
-    const refresh = useRefreshToken()
-    const axiosPrivate = useAxiosprivate()
-    const logout = useLogout()
-    
-    const signOut = async()=>{
-        await logout()
-        console.log("Logged Out")
+    const {auth} = useAuth()
+
+    if(auth?.roles.includes('admin')){
+        return <AdminDashboard />
     }
-
-
-    const getProfile = async()=>{
-        const response = await axiosPrivate.get('/users/me')
-        console.log(response)
+    if(auth?.roles.includes('student')){
+        return <StudentDashboard />
     }
 
 
     
-    return ( 
-        <div>
-            <h1>Welcome to the Dashboard, you have logged in.</h1>
-            <button onClick={()=>refresh()}>Refresh</button>
-            <button onClick={()=>getProfile()}>Profile </button>
-            <button onClick={()=>signOut()}>Logout </button>
-        </div>
-     );
+    
 }
  
 export default Dashboard;

@@ -17,7 +17,7 @@ const AppRoutes = () => {
 
                     {/*Private Routes */}
                     <Route element={<PersistLogin />}>
-                        <Route element={<RequireAuth allowedRoles={['admin']}/>}>
+                        <Route element={<RequireAuth allowedRoles={['admin','student']}/>}>
                             <Route exact path="/dashboard" element = {<Dashboard />} />
                         </Route> 
                     </Route>

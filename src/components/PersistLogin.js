@@ -16,6 +16,7 @@ const PersistLogin = ()=>{
             }
             catch(e){
                 console.log("Token not found")
+                localStorage.removeItem('isLoggedIn')
             }
             finally{
                 isMounted && setIsLoading(false)

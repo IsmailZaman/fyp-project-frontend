@@ -6,6 +6,8 @@ const useLogout = ()=>{
     const {setAuth} = useAuth()
     
     const logout = async()=>{
+        
+        localStorage.removeItem('isLoggedIn')
         setAuth({})
         try{
             const response = await axiosPrivate.post('/users/logout',{withCredentials: true})
