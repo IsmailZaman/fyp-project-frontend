@@ -79,9 +79,14 @@ const LoginPage = () => {
                     type="password"
                     required
                     />
-                    
-                    <button type="submit">LOGIN</button>
-                    {isPending && <p>Loading...</p>}
+                    {!isPending && <button type="submit">LOGIN</button>}
+                    {isPending && (
+                            <div className={styles.ellipsis}>
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                                </div>)}
                     {success && <Navigate to ="/dashboard" state={{from: location}} replace/>}
                 </form>
             </div>

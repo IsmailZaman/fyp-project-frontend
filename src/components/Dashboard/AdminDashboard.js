@@ -1,31 +1,81 @@
-import useRefreshToken from "../../hooks/useRefreshToken";
-import useAxiosprivate from "../../hooks/useAxiosPrivate";
-import useLogout from "../../hooks/useLogout";
+import Layout from "../layout/Layout";
+import { Typography } from "@mui/material";
 
 
 const AdminDashboard = () => {
     
-    const logout = useLogout()
-    const refresh = useRefreshToken()
-    const axiosPrivate = useAxiosprivate()
-
-    const signOut = async()=>{
-        await logout()
-        console.log("Logged Out")
-    }
-
-    const profile = async() =>{
-        const prof = await axiosPrivate.get('/users/me')
-        console.log(prof)
-    }
+    
     
     return ( 
-        <div>
-            <h1>Welcome to the Dashboard, you have logged in.</h1>
-            <button onClick={()=>refresh()}>Refresh</button>
-            <button onClick={()=>profile()}>Profile</button>
-            <button onClick={()=>signOut()}>Logout </button>
-        </div>
+        <Layout>
+           <Typography>
+           Consequat mauris nunc congue nisi vitae suscipit. Fringilla est ullamcorper
+          eget nulla facilisi etiam dignissim diam. Pulvinar elementum integer enim
+          neque volutpat ac tincidunt. Ornare suspendisse sed nisi lacus sed viverra
+          tellus. Purus sit amet volutpat consequat mauris. Elementum eu facilisis
+          sed odio morbi. Euismod lacinia at quis risus sed vulputate odio. Morbi
+          tincidunt ornare massa eget egestas purus viverra accumsan in. In hendrerit
+          gravida rutrum quisque non tellus orci ac. Pellentesque nec nam aliquam sem
+          et tortor. Habitant morbi tristique senectus et. Adipiscing elit duis
+          tristique sollicitudin nibh sit. Ornare aenean euismod elementum nisi quis
+          eleifend. Commodo viverra maecenas accumsan lacus vel facilisis. Nulla
+          posuere sollicitudin aliquam ultrices sagittis orci a.
+           </Typography>
+           <Typography>
+           Consequat mauris nunc congue nisi vitae suscipit. Fringilla est ullamcorper
+          eget nulla facilisi etiam dignissim diam. Pulvinar elementum integer enim
+          neque volutpat ac tincidunt. Ornare suspendisse sed nisi lacus sed viverra
+          tellus. Purus sit amet volutpat consequat mauris. Elementum eu facilisis
+          sed odio morbi. Euismod lacinia at quis risus sed vulputate odio. Morbi
+          tincidunt ornare massa eget egestas purus viverra accumsan in. In hendrerit
+          gravida rutrum quisque non tellus orci ac. Pellentesque nec nam aliquam sem
+          et tortor. Habitant morbi tristique senectus et. Adipiscing elit duis
+          tristique sollicitudin nibh sit. Ornare aenean euismod elementum nisi quis
+          eleifend. Commodo viverra maecenas accumsan lacus vel facilisis. Nulla
+          posuere sollicitudin aliquam ultrices sagittis orci a.
+           </Typography>
+           <Typography>
+           Consequat mauris nunc congue nisi vitae suscipit. Fringilla est ullamcorper
+          eget nulla facilisi etiam dignissim diam. Pulvinar elementum integer enim
+          neque volutpat ac tincidunt. Ornare suspendisse sed nisi lacus sed viverra
+          tellus. Purus sit amet volutpat consequat mauris. Elementum eu facilisis
+          sed odio morbi. Euismod lacinia at quis risus sed vulputate odio. Morbi
+          tincidunt ornare massa eget egestas purus viverra accumsan in. In hendrerit
+          gravida rutrum quisque non tellus orci ac. Pellentesque nec nam aliquam sem
+          et tortor. Habitant morbi tristique senectus et. Adipiscing elit duis
+          tristique sollicitudin nibh sit. Ornare aenean euismod elementum nisi quis
+          eleifend. Commodo viverra maecenas accumsan lacus vel facilisis. Nulla
+          posuere sollicitudin aliquam ultrices sagittis orci a.
+           </Typography>
+           <Typography>
+           Consequat mauris nunc congue nisi vitae suscipit. Fringilla est ullamcorper
+          eget nulla facilisi etiam dignissim diam. Pulvinar elementum integer enim
+          neque volutpat ac tincidunt. Ornare suspendisse sed nisi lacus sed viverra
+          tellus. Purus sit amet volutpat consequat mauris. Elementum eu facilisis
+          sed odio morbi. Euismod lacinia at quis risus sed vulputate odio. Morbi
+          tincidunt ornare massa eget egestas purus viverra accumsan in. In hendrerit
+          gravida rutrum quisque non tellus orci ac. Pellentesque nec nam aliquam sem
+          et tortor. Habitant morbi tristique senectus et. Adipiscing elit duis
+          tristique sollicitudin nibh sit. Ornare aenean euismod elementum nisi quis
+          eleifend. Commodo viverra maecenas accumsan lacus vel facilisis. Nulla
+          posuere sollicitudin aliquam ultrices sagittis orci a.
+           </Typography>
+           <Typography>
+           Consequat mauris nunc congue nisi vitae suscipit. Fringilla est ullamcorper
+          eget nulla facilisi etiam dignissim diam. Pulvinar elementum integer enim
+          neque volutpat ac tincidunt. Ornare suspendisse sed nisi lacus sed viverra
+          tellus. Purus sit amet volutpat consequat mauris. Elementum eu facilisis
+          sed odio morbi. Euismod lacinia at quis risus sed vulputate odio. Morbi
+          tincidunt ornare massa eget egestas purus viverra accumsan in. In hendrerit
+          gravida rutrum quisque non tellus orci ac. Pellentesque nec nam aliquam sem
+          et tortor. Habitant morbi tristique senectus et. Adipiscing elit duis
+          tristique sollicitudin nibh sit. Ornare aenean euismod elementum nisi quis
+          eleifend. Commodo viverra maecenas accumsan lacus vel facilisis. Nulla
+          posuere sollicitudin aliquam ultrices sagittis orci a.
+           </Typography>
+        </Layout>
+       
+        
      );
 }
 
