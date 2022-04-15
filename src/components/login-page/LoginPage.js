@@ -5,6 +5,7 @@ import ErrorMsg from '../reusable-components/errors/ErrorMsg'
 import AuthContext from '../../context/AuthProvider';
 import Arfa from './Arfa.mp4';
 import { Navigate, useLocation } from 'react-router-dom';
+import Loading from '../reusable-components/Loading';
 
 const LoginPage = () => {
     const {setAuth} = useContext(AuthContext)
@@ -21,7 +22,6 @@ const LoginPage = () => {
         setPending(true)
         
         const body = {email,password}
-        console.log(body)
         try{
             
             const loginUser = await axiosPrivate.post('/users/login',body)
@@ -80,13 +80,7 @@ const LoginPage = () => {
                     required
                     />
                     {!isPending && <button type="submit">LOGIN</button>}
-                    {isPending && (
-                            <div className={styles.ellipsis}>
-                                <div></div>
-                                <div></div>
-                                <div></div>
-                                <div></div>
-                                </div>)}
+                    {isPending && <Loading />}
                     {success && <Navigate to ="/dashboard" state={{from: location}} replace/>}
                 </form>
             </div>

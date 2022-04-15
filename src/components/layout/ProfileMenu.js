@@ -5,6 +5,7 @@ import MenuItem from '@mui/material/MenuItem';
 import { useState } from 'react';
 import useLogout from '../../hooks/useLogout';
 import useAxiosprivate from '../../hooks/useAxiosPrivate';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 
 export default function ProfileMenu() {
@@ -43,7 +44,9 @@ export default function ProfileMenu() {
             onClick={handleClick}
             color="secondary"
         >
-            <Avatar>M</Avatar>
+            <Avatar>
+                <AccountCircleIcon />
+            </Avatar>
         </Button>
         <Menu
             id="basic-menu"

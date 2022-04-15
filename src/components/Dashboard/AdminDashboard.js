@@ -8,7 +8,7 @@ const AdminDashboard = () => {
     
     return ( 
         <Layout>
-           <Typography>
+           <Typography paragraph>
            Consequat mauris nunc congue nisi vitae suscipit. Fringilla est ullamcorper
           eget nulla facilisi etiam dignissim diam. Pulvinar elementum integer enim
           neque volutpat ac tincidunt. Ornare suspendisse sed nisi lacus sed viverra

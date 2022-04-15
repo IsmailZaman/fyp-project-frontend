@@ -19,6 +19,8 @@ import { Container } from '@mui/material';
 import { CardMedia } from '@mui/material';
 import logo1 from './logo1.png'
 import ProfileMenu from './ProfileMenu';
+import {useNavigate } from 'react-router-dom';
+import navbarLinks from './navlinks';
 
 const drawerWidth = 240;
 const roundButtons ={
@@ -29,7 +31,11 @@ const roundButtons ={
 
 
 function Layout(props) {
-  const { window,children } = props;
+  
+  const navigate = useNavigate()
+
+
+  const { window,children, title } = props;
   
   const [mobileOpen, setMobileOpen] = useState(false);
 
@@ -52,31 +58,21 @@ function Layout(props) {
         </Container>
       <Container>
       <List>
-        {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
+        {navbarLinks.map((element, index) => (
             
-                <ListItem button key={text} sx={roundButtons}>
-
+                <ListItem button
+                 key={element.name}
+                 onClick={()=>navigate(element.path)} 
+                 sx={roundButtons} >
                     <ListItemIcon>
                     {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
                     </ListItemIcon>
-                    <ListItemText color="secondary" primary={text} />
+                    <ListItemText color="secondary" primary={element.name} />
                 </ListItem>
           
         ))}
       </List>
       <Divider />
-      <List>
-        {['All mail', 'Trash', 'Spam'].map((text, index) => (
-            
-            <ListItem button key={text}>
-                <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                </ListItemIcon>
-                <ListItemText primary={text} />
-            </ListItem>
-          
-        ))}
-      </List>
       </Container>
     </div>
   );
@@ -105,7 +101,7 @@ function Layout(props) {
             <MenuIcon sx={{backgroundColor: 'white !important'}} />
           </IconButton>
           <Typography color="secondary" variant="h6" noWrap component="div" sx={{flexGrow: 1}}>
-            Admin Dashboard
+            {title ? title : 'Welcome to ITU'}
           </Typography>
           <ProfileMenu />
         </Toolbar>
@@ -113,7 +109,7 @@ function Layout(props) {
 
       <Box
         component="nav"
-        sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 }, background: 'red'}}
+        sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 }}}
         aria-label="mailbox folders"
       >
         {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
@@ -150,15 +146,21 @@ function Layout(props) {
       
       <Box
         component="main"
-        sx={{ flexGrow: 1, p: 3, width: { sm: `calc(100% - ${drawerWidth}px)` }, overflowY: "scroll", 
+        sx={{ flexGrow: 1, p: 3, width: { sm: `calc(100% - ${drawerWidth}px)` },
+        overflowY: "scroll", 
         maxHeight: '100vh',
         //backgroundImage: `url(${bg})`,
-        color: 'white'
+        color: 'white',
+        minWidth: {sm: 500,xs: 500, md: 700, lg: 1100, xl: 1400}
     
     }}
       >
         <Toolbar />
-        {children}
+        <Container sx={{minWidth:`calc(100% - ${drawerWidth}px)` }}>
+          {children}
+        </Container>
+          
+        
       </Box>
     </Box>
   );
