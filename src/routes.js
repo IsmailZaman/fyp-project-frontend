@@ -6,6 +6,7 @@ import RequireAuth from './components/RequireAuth';
 import Unauthorized from './components/Unauthorized';
 import { ThemeProvider } from '@mui/material/styles';
 import theme from './theme';
+import Students from './components/pages/students/Students';
 
 
 const AppRoutes = () => {
@@ -23,6 +24,10 @@ const AppRoutes = () => {
                         <Route element={<RequireAuth allowedRoles={['admin','student']}/>}>
                                 <Route exact path="/dashboard" element = {<Dashboard />} />
                         </Route> 
+
+                        <Route element={<RequireAuth allowedRoles={['admin']}/>}>
+                            <Route exact path="/students" element = {<Students/>} />
+                        </Route>
                     </Route>
 
                 </Routes>
