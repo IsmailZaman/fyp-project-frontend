@@ -1,29 +1,34 @@
 import Layout from "../../layout/Layout";
-import StudentDataGrid from "./StudentList";
-import StudentForm from "./CreateStudentForm";
-import { useForm } from 'react-hook-form';
+import CoursesDataGrid from "./CoursesList";
 import { useState } from "react";
-import createStudentFields from "./createStudentFields";
+import { useForm } from "react-hook-form";
+import createCourseFields from "./createCourseFields";
 import Button from '@mui/material/Button';
 import Alert from '@mui/material/Alert';
+import CourseForm from "./CreateCourseForm";
 
-const Students = () => {
-    
+
+const Courses = () => {
+
     const [success,setSuccess] = useState(false)
     const [msg, setMsg] = useState(false)
     const { register, handleSubmit, formState: { errors }} = useForm();
 
 
-    return ( <Layout title="Student Management">
+    return ( 
+        <Layout title="Course Management">
 
-            <StudentForm register={register} 
+        <CourseForm
+            register={register} 
             handleSubmit={handleSubmit} 
             errors={errors} 
-            url='/users/students' 
-            fields={createStudentFields}
+            url='/courses' 
+            fields={createCourseFields}
             setSuccess={setSuccess}
-            setMsg={setMsg} />
-            {success && <Alert
+            setMsg={setMsg}
+            />
+            
+        {success && <Alert
                 action={
                 <Button color="inherit" size="small" onClick={()=>{
                     setSuccess(false)
@@ -33,13 +38,18 @@ const Students = () => {
                 </Button>
                 }
             >
-        {msg}
-      </Alert>}
-            <StudentDataGrid/>
-            
-            
+            {msg}
+             </Alert>}
+
+
+
+
+            <CoursesDataGrid/>
+
+
+
         </Layout>
-    )
+        );
 }
  
-export default Students;
+export default Courses;

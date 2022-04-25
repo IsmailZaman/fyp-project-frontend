@@ -1,11 +1,11 @@
 const navbarLinks = [
     {
         name: "Departments",
-        path: "/"
+        path: "/departments"
     },
     {
         name: "Courses",
-        path: "/"
+        path: "/courses"
     },
     {
         name: "Students",
@@ -13,7 +13,11 @@ const navbarLinks = [
     },
     {
         name: "Sessions",
-        path: "/"
+        path: "/sessions"
+    },
+    {
+        name: "Offered Courses",
+        path: "/offeredcourses"
     }
 
 

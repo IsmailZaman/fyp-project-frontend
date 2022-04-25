@@ -1,6 +1,7 @@
 .ellipsis {
     display: inline-block;
     position: relative;
+    margin: auto;
     width: 80px;
     height: 80px;
   }

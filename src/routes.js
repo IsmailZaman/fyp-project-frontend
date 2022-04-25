@@ -7,6 +7,10 @@ import Unauthorized from './components/Unauthorized';
 import { ThemeProvider } from '@mui/material/styles';
 import theme from './theme';
 import Students from './components/pages/students/Students';
+import Departments from './components/pages/departments/Departments';
+import Courses from './components/pages/courses/Courses';
+import Sessions from './components/pages/sessions/sessions';
+import OfferedCourses from './components/pages/offeredcourses/OfferedCourses';
 
 
 const AppRoutes = () => {
@@ -27,7 +31,13 @@ const AppRoutes = () => {
 
                         <Route element={<RequireAuth allowedRoles={['admin']}/>}>
                             <Route exact path="/students" element = {<Students/>} />
+                            <Route exact path="/departments" element = {<Departments/>} />
+                            <Route exact path="/courses" element = {<Courses/>} />
+                            <Route exact path="/sessions" element = {<Sessions/>} />
+                            <Route exact path="/offeredcourses" element = {<OfferedCourses/>} />
                         </Route>
+
+                        
                     </Route>
 
                 </Routes>

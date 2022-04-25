@@ -1,28 +1,31 @@
 import Layout from "../../layout/Layout";
-import StudentDataGrid from "./StudentList";
-import StudentForm from "./CreateStudentForm";
-import { useForm } from 'react-hook-form';
+import DepartmentForm from "./CreateDeptForm";
+import DepartmentDataGrid from "./DepartmentList";
 import { useState } from "react";
-import createStudentFields from "./createStudentFields";
+import { useForm } from "react-hook-form";
+import createDeptFields from "./createDeptFields";
 import Button from '@mui/material/Button';
 import Alert from '@mui/material/Alert';
 
-const Students = () => {
-    
+
+const Departments = () => {
     const [success,setSuccess] = useState(false)
     const [msg, setMsg] = useState(false)
     const { register, handleSubmit, formState: { errors }} = useForm();
 
-
-    return ( <Layout title="Student Management">
-
-            <StudentForm register={register} 
+    return ( 
+        <Layout title="Departments">
+            <DepartmentForm
+            register={register} 
             handleSubmit={handleSubmit} 
             errors={errors} 
-            url='/users/students' 
-            fields={createStudentFields}
+            url='/departments' 
+            fields={createDeptFields}
             setSuccess={setSuccess}
-            setMsg={setMsg} />
+            setMsg={setMsg}
+            />
+
+
             {success && <Alert
                 action={
                 <Button color="inherit" size="small" onClick={()=>{
@@ -33,13 +36,13 @@ const Students = () => {
                 </Button>
                 }
             >
-        {msg}
-      </Alert>}
-            <StudentDataGrid/>
-            
-            
+            {msg}
+             </Alert>}
+
+            <DepartmentDataGrid/>
+
         </Layout>
-    )
+     );
 }
  
-export default Students;
+export default Departments;

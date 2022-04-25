@@ -12,25 +12,17 @@ const columns = [
   {
     field: 'Name',
     headerName: 'Name',
-    width: 150,
+    width: 250,
   },
   {
-    field: 'Email',
-    headerName: 'Email',
+    field: 'academicYear',
+    headerName: 'Academic Year',
     width: 200
   },
   {
-    field: 'rollNumber',
-    headerName: 'Roll Number'
-  },
-  {
-    field: 'department',
-    headerName: 'Department',
-    width: 150
-  },
-  {
-    field: 'batch',
-    headerName: 'Batch'
+    field: 'enrollmentPeriod',
+    headerName: 'Enrollment Period',
+    width: 200
   }
 ];
 
@@ -38,23 +30,20 @@ const columns = [
 
 
 
-export default function StudentDataGrid() {
+export default function SessionDataGrid() {
   
 
 
 
-  const {apiData, loading, error} = useFetch('/students')
+  const {apiData, loading, error} = useFetch('/session/all')
   let rows = []
   
   if(apiData){
-    
     rows = apiData.data.map((row)=>({
       id: row?._id,
       Name: row?.name,
-      Email: row?.email,
-      rollNumber: row.studentData?.rollNumber,
-      department: row?.studentData?.department,
-      batch: row?.studentData?.batch
+      enrollmentPeriod: row?.enrollmentPeriod,
+      academicYear: row?.academicYear
     }))
   }
   
@@ -63,7 +52,7 @@ export default function StudentDataGrid() {
     
     <div>
       {!loading &&
-      <Box sx={{ height:1000}}>
+      <Box sx={{ height:800}}>
         <DataGrid columns={columns} rows={rows} components={{ Toolbar: GridToolbar }} />
       </Box>}
       {loading && <Loading/>}

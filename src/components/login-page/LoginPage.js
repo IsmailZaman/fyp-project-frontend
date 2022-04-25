@@ -1,11 +1,12 @@
 import styles from './login.module.css'
 import { useState , useContext} from 'react';
 import { axiosPrivate } from '../../api/axios';
-import ErrorMsg from '../reusable-components/errors/ErrorMsg'
 import AuthContext from '../../context/AuthProvider';
 import Arfa from './Arfa.mp4';
 import { Navigate, useLocation } from 'react-router-dom';
 import Loading from '../reusable-components/Loading';
+import ErrorMsg from '../reusable-components/feedback/ErrorMsg';
+
 
 const LoginPage = () => {
     const {setAuth} = useContext(AuthContext)
@@ -18,6 +19,7 @@ const LoginPage = () => {
     const [success,setSuccess] = useState(false)
 
     const handleSubmit = async (e)=>{
+        setError('')
         e.preventDefault()
         setPending(true)
         
@@ -82,6 +84,8 @@ const LoginPage = () => {
                     {!isPending && <button type="submit">LOGIN</button>}
                     {isPending && <Loading />}
                     {success && <Navigate to ="/dashboard" state={{from: location}} replace/>}
+                    {error !== '' && <ErrorMsg msg={error}/> }
+                    
                 </form>
             </div>
         </div> : <Navigate to ="/dashboard" state={{from: location}} replace/>
