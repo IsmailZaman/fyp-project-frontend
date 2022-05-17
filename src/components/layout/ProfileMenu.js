@@ -4,13 +4,13 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import { useState } from 'react';
 import useLogout from '../../hooks/useLogout';
-import useAxiosprivate from '../../hooks/useAxiosPrivate';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import { useNavigate } from 'react-router-dom';
 
 
 export default function ProfileMenu() {
 
-    const axiosPrivate = useAxiosprivate()
+    const navigate = useNavigate()
 
     const logout = useLogout()
     const signOut = async()=>{
@@ -21,8 +21,8 @@ export default function ProfileMenu() {
 
     const profile = async() =>{
         setAnchorEl(null);
-        const prof = await axiosPrivate.get('/users/me')
-        console.log(prof)
+        navigate('/profile',{replace: true})
+        
     }
 
     const [anchorEl, setAnchorEl] = useState(null);

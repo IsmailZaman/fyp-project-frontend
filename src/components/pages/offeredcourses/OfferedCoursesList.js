@@ -44,7 +44,7 @@ const columns = [
       
       <div>
         {!loading &&
-        <Box sx={{ height:1000}}>
+        <Box sx={{ height:700}}>
           <DataGrid columns={columns} rows={rows} components={{ Toolbar: GridToolbar }} />
         </Box>}
         {loading && <Loading/>}

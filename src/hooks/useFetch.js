@@ -1,12 +1,13 @@
 import useAxiosprivate from "./useAxiosPrivate";
 import { useEffect,useState } from "react";
-import { axiosPrivate } from "../api/axios";
+//axios private
 
 const useFetch = (url) => {
     
     const [data, setData]=useState(null)
     const [loading, setLoading]=useState(false)
     const [error, setError]=useState(null)
+    const axiosPrivate = useAxiosprivate()
 
     useEffect(()=>{
         

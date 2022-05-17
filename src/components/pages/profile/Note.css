@@ -1,0 +1,29 @@
+.makeCenter{
+    display: flex !important;
+    align-items: center!important;
+    justify-content: center!important;
+    height: 100% !important;
+    
+    
+
+}
+.BC{
+    display: flex !important;
+    width: 10% !important;
+    height: auto !important;
+    align-items: center!important;
+    text-align: center!important;
+}
+
+.LC{
+    display: flex !important;
+    width: 80% !important;
+    height: auto !important;
+    align-items: center!important;
+    text-align: center!important;
+}
+.ProfileCard{
+    border: 2;
+    border-radius: 2;
+    border-color: 'primary.main';
+}

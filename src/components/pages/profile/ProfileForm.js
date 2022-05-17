@@ -4,25 +4,23 @@ import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
-import { useState} from 'react';
-import useAxiosprivate from '../../hooks/useAxiosPrivate';
-import Loading from './Loading'
-import ErrorMsg from './feedback/ErrorMsg';
+import { useState } from 'react';
+import useAxiosprivate from '../../../hooks/useAxiosPrivate';
+import Loading from '../../reusable-components/Loading';
+import ErrorMsg from '../../reusable-components/feedback/ErrorMsg';
 import { Container } from '@mui/material';
+import EditIcon from '@mui/icons-material/Edit';
 
 
 
 
 
-
-
-export default function Form(props) {
-
-    
+export default function ProfileForm(props) {
   
-    const {register, handleSubmit, url, fields, title, btnTitle,btnStyle} = props
+    const {register, handleSubmit, url, fields, title, btnTitle} = props
     const [open, setOpen] = useState(false)
     const [error,setError] = useState('')
+    
 
 
     const [isPending, setPending] = useState(false)
@@ -42,17 +40,23 @@ export default function Form(props) {
         setError('')
         try{
             setPending(true)
-            const addedResource = await axiosPrivate.post(url, data)
-            if(!addedResource){
-                throw new Error("unable to add resource")
+            const updatedResource = await axiosPrivate.patch(url, data)
+            if(!updatedResource){
+                 throw new Error("unable to update password")
             }
             setPending(false)
             setOpen(false)
             window.location.reload()
             
         }catch(e){
-            console.log(e)
-            setError(e?.response?.data)
+
+            if(e?.response?.data){
+                setError('Unable to update.')
+            }else{
+                setError('Unable to update.')
+            }
+           
+            
         }finally{
             setPending(false)
         }
@@ -64,10 +68,16 @@ export default function Form(props) {
 
     return (
         <div>
-      
-        <Button variant="outlined" onClick={handleClickOpen} sx={btnStyle ? btnStyle : {marginBottom:"20px"}}>
-            {btnTitle}
-        </Button>
+        
+        
+
+        <Button startIcon={<EditIcon />} sx={{
+                    ml: 4,
+                    color: "black",
+                    backgroundColor: ""
+                }}
+                 size="large"
+                 onClick={handleClickOpen}>{btnTitle}</Button>
     
         
         
@@ -101,7 +111,7 @@ export default function Form(props) {
                     {!isPending &&
                     <>
                         <Button onClick={handleClose}>Cancel</Button>
-                        <Button type='submit'>Add</Button>
+                        <Button type='submit'>Update</Button>
                     </>
                     }  
                     {isPending && <Loading />}

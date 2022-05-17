@@ -15,6 +15,9 @@ import DialogContentText from '@mui/material/DialogContentText';
 import useAxiosprivate from "../../../hooks/useAxiosPrivate";
 import ErrorMsg from "../../reusable-components/feedback/ErrorMsg";
 import Loading from "../../reusable-components/Loading";
+import EditIcon from '@mui/icons-material/Edit';
+import { useNavigate } from "react-router-dom";
+
 
 
 
@@ -30,7 +33,9 @@ const ActiveSession = (props) => {
     const [isPending, setPending] = useState(false)
     const [error, setError] = useState('')
     const axiosPrivate = useAxiosprivate()
-    
+    const navigate = useNavigate()
+
+   
 
     function createData(field, value) {
         return { field, value };
@@ -111,10 +116,25 @@ const ActiveSession = (props) => {
                 </Table>
         </TableContainer>
 
-        <Button variant="outlined" onClick={handleClickOpen} sx={{marginBottom: "20px"}}>
-                    Finish the Session
-        </Button>
-
+        
+        <div style={{display: "flex", marginTop: "20px"}}>
+        <Button startIcon={<EditIcon />} sx={{
+                    ml: 4,
+                    color: "black",
+                    backgroundColor: ""
+                }}
+                 size="large"
+                 onClick={handleClickOpen}>Finish the Session</Button>
+        
+        
+        <Button startIcon={<EditIcon />} sx={{
+                    ml: 4,
+                    color: "black",
+                    backgroundColor: ""
+                }}
+                 size="large"
+                 onClick={()=>navigate('/addcourses')}>Add Courses</Button>
+        </div>
         <Dialog open={open} onClose={handleClose}>
         <DialogContent>
           <DialogContentText>

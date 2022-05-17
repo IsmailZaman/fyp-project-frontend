@@ -18,6 +18,10 @@ const navbarLinks = [
     {
         name: "Offered Courses",
         path: "/offeredcourses"
+    },
+    {
+        name: "Profile",
+        path: "/profile"
     }
 
 
