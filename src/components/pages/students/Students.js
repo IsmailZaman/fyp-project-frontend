@@ -6,6 +6,7 @@ import { useState } from "react";
 import createStudentFields from "./createStudentFields";
 import Button from '@mui/material/Button';
 import Alert from '@mui/material/Alert';
+import adminNavbarLinks from "../../layout/admin-navlinks";
 
 const Students = () => {
     
@@ -14,7 +15,7 @@ const Students = () => {
     const { register, handleSubmit, formState: { errors }} = useForm();
 
 
-    return ( <Layout title="Student Management">
+    return ( <Layout title="Student Management" navlinks={adminNavbarLinks}>
 
             <StudentForm register={register} 
             handleSubmit={handleSubmit} 

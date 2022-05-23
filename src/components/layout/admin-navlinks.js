@@ -1,4 +1,4 @@
-const navbarLinks = [
+const adminNavbarLinks = [
     {
         name: "Departments",
         path: "/departments"
@@ -29,4 +29,4 @@ const navbarLinks = [
 ]
 
 
-export default navbarLinks
+export default adminNavbarLinks

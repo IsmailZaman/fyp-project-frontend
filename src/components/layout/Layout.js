@@ -20,7 +20,7 @@ import { CardMedia } from '@mui/material';
 import logo1 from './logo1.png'
 import ProfileMenu from './ProfileMenu';
 import {useNavigate } from 'react-router-dom';
-import navbarLinks from './navlinks';
+import adminNavbarLinks from './admin-navlinks';
 
 const drawerWidth = 240;
 const roundButtons ={
@@ -35,7 +35,7 @@ function Layout(props) {
   const navigate = useNavigate()
 
 
-  const { window,children, title } = props;
+  const { window,children, title, navlinks } = props;
   
   const [mobileOpen, setMobileOpen] = useState(false);
 
@@ -58,7 +58,7 @@ function Layout(props) {
         </Container>
       <Container>
       <List>
-        {navbarLinks.map((element, index) => (
+        {navlinks.map((element, index) => (
             
                 <ListItem button
                  key={element.name}
@@ -151,7 +151,7 @@ function Layout(props) {
         maxHeight: '100vh',
         //backgroundImage: `url(${bg})`,
         color: 'white',
-        minWidth: {sm: 500,xs: 500, md: 700, lg: 1100, xl: 1400}
+        minWidth: {sm: 500,xs: 500, md: 700, lg: 1100, xl: 1800}
     
     }}
       >

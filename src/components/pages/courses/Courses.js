@@ -6,6 +6,7 @@ import createCourseFields from "./createCourseFields";
 import Button from '@mui/material/Button';
 import Alert from '@mui/material/Alert';
 import CourseForm from "./CreateCourseForm";
+import adminNavbarLinks from "../../layout/admin-navlinks";
 
 
 const Courses = () => {
@@ -16,7 +17,7 @@ const Courses = () => {
 
 
     return ( 
-        <Layout title="Course Management">
+        <Layout title="Course Management" navlinks={adminNavbarLinks}>
 
         <CourseForm
             register={register} 

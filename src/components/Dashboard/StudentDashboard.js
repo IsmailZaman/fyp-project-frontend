@@ -1,6 +1,12 @@
+import Layout from "../layout/Layout"
+import studentNavbarLinks from "../layout/student-navlinks"
+
 const StudentDashboard = () => {
     return (
-        <h1>Welcome to Student Dashboard</h1>
+        <Layout title="Student Dashboard" navlinks={studentNavbarLinks}>
+            <h1>Welcome to Student Dashboard</h1>
+        </Layout>
+        
     )
 }
 
