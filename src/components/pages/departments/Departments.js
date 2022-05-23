@@ -6,6 +6,7 @@ import { useForm } from "react-hook-form";
 import createDeptFields from "./createDeptFields";
 import Button from '@mui/material/Button';
 import Alert from '@mui/material/Alert';
+import adminNavbarLinks from "../../layout/admin-navlinks"
 
 
 const Departments = () => {
@@ -14,7 +15,7 @@ const Departments = () => {
     const { register, handleSubmit, formState: { errors }} = useForm();
 
     return ( 
-        <Layout title="Departments">
+        <Layout title="Departments" navlinks={adminNavbarLinks}>
             <DepartmentForm
             register={register} 
             handleSubmit={handleSubmit} 

@@ -1,5 +1,6 @@
 import Layout from "../layout/Layout";
 import { Typography } from "@mui/material";
+import adminNavbarLinks from "../layout/admin-navlinks";
 
 
 const AdminDashboard = () => {
@@ -7,7 +8,7 @@ const AdminDashboard = () => {
     
     
     return ( 
-        <Layout>
+        <Layout navlinks={adminNavbarLinks}>
            <Typography paragraph>
            Consequat mauris nunc congue nisi vitae suscipit. Fringilla est ullamcorper
           eget nulla facilisi etiam dignissim diam. Pulvinar elementum integer enim

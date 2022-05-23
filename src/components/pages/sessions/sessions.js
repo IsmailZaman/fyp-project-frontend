@@ -6,6 +6,7 @@ import ActiveSession from "./ActiveSession";
 import InactiveSession from "./InactiveSession";
 import SessionDataGrid from "./SessionList";
 import { Stack } from "@mui/material";
+import adminNavbarLinks from "../../layout/admin-navlinks";
 
 const Sessions = () => {
 
@@ -17,7 +18,7 @@ const Sessions = () => {
     
 
     return ( 
-        <Layout title="Sessions">
+        <Layout title="Sessions" navlinks={adminNavbarLinks}>
             <Stack spacing={4}>
                 <Box sx={{height: apiData ? "65%" : "30%", border: "1px solid rgba(0, 0, 0, 0.12)",borderRadius: "12px"}}>
                     
