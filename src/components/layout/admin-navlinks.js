@@ -1,5 +1,9 @@
 const adminNavbarLinks = [
     {
+        name: "Dashboard",
+        path: "/dashboard"
+    },
+    {
         name: "Departments",
         path: "/departments"
     },
