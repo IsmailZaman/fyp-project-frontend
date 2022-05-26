@@ -2,8 +2,29 @@ import { Box } from '@mui/material';
 import { DataGrid, GridToolbar } from '@mui/x-data-grid';
 import useFetch from '../../../hooks/useFetch';
 import Loading from '../../reusable-components/Loading';
+import { Button } from '@mui/material';
 
 
+const renderProfileButton = (params) => {
+  
+  
+  return (
+      <strong>
+          <Button
+              variant="contained"
+              color="primary"
+              size="small"
+              style={{ marginLeft: 16 }}
+              onClick={(e) => {
+                  e.preventDefault();
+                  window.location.href=`http://localhost:5000/profile/${params?.id}`;
+              }}
+          >
+              Profile
+          </Button>
+      </strong>
+  )
+}
 
 
 
@@ -31,6 +52,11 @@ const columns = [
   {
     field: 'batch',
     headerName: 'Batch'
+  },
+  {
+    field: 'profile link',
+    width: 150,
+    renderCell: renderProfileButton,
   }
 ];
 

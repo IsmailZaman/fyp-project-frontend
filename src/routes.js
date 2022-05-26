@@ -13,6 +13,7 @@ import Sessions from './components/pages/sessions/sessions';
 import OfferedCourses from './components/pages/offeredcourses/OfferedCourses';
 import Profile from './components/pages/profile/Profile';
 import AddCoursesForm from './components/pages/sessions/CourseForm/AddCoursesForm';
+import StudentProfile from './components/pages/profile/StudentProfile';
 
 
 
@@ -42,6 +43,7 @@ const AppRoutes = () => {
                                 <Route exact path="/sessions" element = {<Sessions/>} />
                                 <Route exact path="/offeredcourses" element = {<OfferedCourses/>} />
                                 <Route exact path="/addcourses" element = {<AddCoursesForm/>} />
+                                <Route exact path="/profile/:id" element = {<StudentProfile/>} />
                             </Route>
                             
                         </Route>

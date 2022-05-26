@@ -11,11 +11,28 @@ import { useForm } from 'react-hook-form';
 import changePasswordFields from './changePasswordFields';
 
 
-export default function ProfileCard(props)
+export default function StudentProfileCard(props)
 {
     const {data, title} = props
     delete data.__v
     delete data._id
+    const studentData = data?.studentData
+    delete data?.studentData
+    delete data?.semesterList
+    delete data?.createdBy
+    delete data?.createdAt
+    delete data?.updatedAt
+    
+    if(studentData){
+        Object.keys(studentData).forEach((key)=>{
+            data[key] = studentData[key]
+            console.log(key, studentData[key])
+        })
+    }
+    
+
+    
+
     const { register, handleSubmit, formState: { errors }} = useForm();
 
     return (
