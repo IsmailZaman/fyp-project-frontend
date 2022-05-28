@@ -37,7 +37,25 @@ export default function CoursesList (){
     }))
   }
   const [selectionModel, setSelectionModel] = useState([]);
+  const [selectedCourses, setSelectedCourses] = useState([]);
 
+  const courseSelection = (selectedCoursesArray) => {
+    let rowMap = {};
+
+    // store all row element in object
+    for (let i = 0; i < rows.length; i++) {
+      rowMap[rows[i].id] = rows[i];
+    }
+
+    let selectedCourseArray =[];
+    selectedCoursesArray.forEach(elementID => {
+      if(rowMap[elementID]) {
+        selectedCourseArray.push(rowMap[elementID]);
+      }
+    });
+    setSelectedCourses(selectedCourseArray);
+  }
+ 
   return (
 
     <div>
@@ -46,7 +64,9 @@ export default function CoursesList (){
           <DataGrid
         checkboxSelection
         onSelectionModelChange={(newSelectionModel) => {
+          courseSelection(newSelectionModel);
           setSelectionModel(newSelectionModel);
+          
         }}
         selectionModel={selectionModel}
         columns={columns} rows={rows}
@@ -54,6 +74,11 @@ export default function CoursesList (){
         </Box>}
         {loading && <Loading/>}
         {error && <h1>Failed to Fetch Data</h1>}
+        {selectedCourses.length !== 0 &&
+        <div>
+          Selected Courses : {selectedCourses.length} 
+        </div>
+        }
       </div>
   );
 
