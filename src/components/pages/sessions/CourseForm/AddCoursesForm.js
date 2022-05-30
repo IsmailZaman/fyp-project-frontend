@@ -6,9 +6,14 @@ import adminNavbarLinks from '../../../layout/admin-navlinks';
 
 
 
-export default function AddCoursesForm() {
+
+const AddCoursesForm = () => {
  
  const {apiData, loading,error} = useFetch('/session/active')
+ 
+
+
+
 
 
   
@@ -21,6 +26,10 @@ export default function AddCoursesForm() {
         {loading && <Loading/>}
         {!loading &&( apiData && <CoursesList/>) }
         {error && <h1>No Active Session Found.</h1>}
+        
+
     </Layout>
   )
 }
+
+export default AddCoursesForm

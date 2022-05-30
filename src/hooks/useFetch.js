@@ -26,6 +26,8 @@ const useFetch = (url) => {
         
         fetchData()
 
+        return ()=>{}
+
     },[url])
 
     return {apiData: data,loading,error}

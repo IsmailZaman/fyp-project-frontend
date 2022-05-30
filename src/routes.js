@@ -14,6 +14,7 @@ import OfferedCourses from './components/pages/offeredcourses/OfferedCourses';
 import Profile from './components/pages/profile/Profile';
 import AddCoursesForm from './components/pages/sessions/CourseForm/AddCoursesForm';
 import StudentProfile from './components/pages/profile/StudentProfile';
+import DataContextProvider from './context/DataContext';
 
 
 
@@ -23,32 +24,34 @@ const AppRoutes = () => {
         <div className="App">
             
                 <ThemeProvider theme={theme}>
-                    <Routes>
-                        {/*Public Routes */}
-                        <Route exact path="/" element={<LoginPage />}/>
-                        <Route exact path="/unauthorized" element= {<Unauthorized/>} />
+                    <DataContextProvider>
+                        <Routes>
+                            {/*Public Routes */}
+                            <Route exact path="/" element={<LoginPage />}/>
+                            <Route exact path="/unauthorized" element= {<Unauthorized/>} />
 
-                        {/*Private Routes */}
-                        <Route element={<PersistLogin />}>
-                            
-                            <Route element={<RequireAuth allowedRoles={['admin','student']}/>}>
-                                    <Route exact path="/dashboard" element = {<Dashboard />} />
-                                    <Route exact path="/profile" element={<Profile/>}/>
-                            </Route> 
+                            {/*Private Routes */}
+                            <Route element={<PersistLogin />}>
+                                
+                                <Route element={<RequireAuth allowedRoles={['admin','student']}/>}>
+                                        <Route exact path="/dashboard" element = {<Dashboard />} />
+                                        <Route exact path="/profile" element={<Profile/>}/>
+                                </Route> 
 
-                            <Route element={<RequireAuth allowedRoles={['admin']}/>}>
-                                <Route exact path="/students" element = {<Students/>} />
-                                <Route exact path="/departments" element = {<Departments/>} />
-                                <Route exact path="/courses" element = {<Courses/>} />
-                                <Route exact path="/sessions" element = {<Sessions/>} />
-                                <Route exact path="/offeredcourses" element = {<OfferedCourses/>} />
-                                <Route exact path="/addcourses" element = {<AddCoursesForm/>} />
-                                <Route exact path="/profile/:id" element = {<StudentProfile/>} />
+                                <Route element={<RequireAuth allowedRoles={['admin']}/>}>
+                                    <Route exact path="/students" element = {<Students/>} />
+                                    <Route exact path="/departments" element = {<Departments/>} />
+                                    <Route exact path="/courses" element = {<Courses/>} />
+                                    <Route exact path="/sessions" element = {<Sessions/>} />
+                                    <Route exact path="/offeredcourses" element = {<OfferedCourses/>} />
+                                    <Route exact path="/addcourses" element = {<AddCoursesForm/>} />
+                                    <Route exact path="/profile/:id" element = {<StudentProfile/>} />
+                                </Route>
+                                
                             </Route>
-                            
-                        </Route>
 
-                    </Routes>
+                        </Routes>
+                    </DataContextProvider>
                 </ThemeProvider>
             
             

@@ -4,7 +4,6 @@ import useFetch from '../../../hooks/useFetch';
 import Loading from '../../reusable-components/Loading';
 
 
-
 const columns = [
     { field: 'id', headerName: 'ID', width: 90 },
     {
@@ -27,7 +26,7 @@ const columns = [
 
 
 
-    const {apiData, loading, error} = useFetch('/offeredcourse')
+    const {apiData, loading, error} = useFetch('/offeredcourse/active')
     let rows = []
     
     if(apiData){
@@ -38,17 +37,19 @@ const columns = [
         Session: row?.Session
       }))
     }
-    
+
+
   
     return (
       
       <div>
-        {!loading &&
+        {(!loading && !error)&&(
         <Box sx={{ height:700}}>
           <DataGrid columns={columns} rows={rows} components={{ Toolbar: GridToolbar }} />
-        </Box>}
+        </Box>)}
+        
         {loading && <Loading/>}
-        {error && <h1>Failed to Fetch Data</h1>}
+        {error && <h1>No Active Session Found</h1>}
       </div>
       
     );

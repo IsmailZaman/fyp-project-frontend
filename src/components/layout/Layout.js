@@ -156,7 +156,7 @@ function Layout(props) {
     }}
       >
         <Toolbar />
-        <Container sx={{minWidth:`calc(100% - ${drawerWidth}px)` }}>
+        <Container sx={{minWidth:`calc(100% - ${drawerWidth}px)`}}>
           {children}
         </Container>
           

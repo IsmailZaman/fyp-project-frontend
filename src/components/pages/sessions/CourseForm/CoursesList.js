@@ -3,6 +3,16 @@ import { useState} from 'react';
 import useFetch from '../../../../hooks/useFetch';
 import Loading from '../../../reusable-components/Loading'
 import Box from '@mui/material/Box';
+import Alert from '@mui/material/Alert';
+import Button from '@mui/material/Button';
+import SendIcon from '@mui/icons-material/Send';
+import Typography from '@mui/material/Typography';
+import useAxiosprivate from '../../../../hooks/useAxiosPrivate';
+import { useNavigate } from "react-router-dom";
+import { useContext } from 'react';
+import { DataContext } from '../../../../context/DataContext';
+
+
 
 
 
@@ -22,7 +32,15 @@ const columns = [
   }
 ];
 
-export default function CoursesList (){
+const CoursesList = () =>{
+
+  const axiosPrivate = useAxiosprivate()
+  const navigate = useNavigate()
+  const {updateData}= useContext(DataContext)
+
+
+  const [submitError,setError] = useState('')
+  const [isPending, setPending] = useState(false)
   
 
   const {apiData, loading, error} = useFetch('/courses')
@@ -55,12 +73,39 @@ export default function CoursesList (){
     });
     setSelectedCourses(selectedCourseArray);
   }
+
+  const onSubmit = async() =>{
+    
+    setError('')
+    try{
+      setPending(true)
+      const arrayOfIds = selectedCourses.map((course)=>{
+        return course.id
+      })
+      const addedResource = await axiosPrivate.post('/offeredcourse/add',{courses: arrayOfIds})
+      if(!addedResource){
+        throw new Error('Unable to add resources')
+      }
+      if(addedResource){
+        updateData('feedback', {success: true, successMsg: `${addedResource.data}`})
+      }
+
+      setSelectedCourses([])
+      setPending(false)
+      return navigate("/offeredcourses", { replace: true });
+    }catch(e){
+      console.log(e)
+      setError(e?.response?.data)
+    }finally{
+      setPending(false)
+    }
+  }
  
   return (
 
     <div>
         {!loading &&
-        <Box sx={{ height:700}}>
+        <Box sx={{ height:500}}>
           <DataGrid
         checkboxSelection
         onSelectionModelChange={(newSelectionModel) => {
@@ -75,8 +120,14 @@ export default function CoursesList (){
         {loading && <Loading/>}
         {error && <h1>Failed to Fetch Data</h1>}
         {selectedCourses.length !== 0 &&
-        <div>
-          Selected Courses : {selectedCourses.length} 
+        <div style={{display:'flex'}}>
+          <Alert icon={false} severity="success" sx={{marginTop: 5}}>
+            <Typography variant='h5'>{selectedCourses.length} courses selected. </Typography>
+            {isPending && <Loading />}
+            {!isPending && <Button onClick={onSubmit} endIcon={<SendIcon/>}>Add</Button>}
+            {submitError !== ''&& <div>{submitError}</div>}
+          </Alert>
+         
         </div>
         }
       </div>
@@ -84,5 +135,5 @@ export default function CoursesList (){
 
 }
 
-
+export default CoursesList
 
