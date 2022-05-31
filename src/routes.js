@@ -15,6 +15,7 @@ import Profile from './components/pages/profile/Profile';
 import AddCoursesForm from './components/pages/sessions/CourseForm/AddCoursesForm';
 import StudentProfile from './components/pages/profile/StudentProfile';
 import DataContextProvider from './context/DataContext';
+import Batch from './components/pages/batches/Batch';
 
 
 
@@ -46,6 +47,8 @@ const AppRoutes = () => {
                                     <Route exact path="/offeredcourses" element = {<OfferedCourses/>} />
                                     <Route exact path="/addcourses" element = {<AddCoursesForm/>} />
                                     <Route exact path="/profile/:id" element = {<StudentProfile/>} />
+                                    <Route exact path="batch" element = {<Batch/>} />
+
                                 </Route>
                                 
                             </Route>

@@ -16,12 +16,6 @@ const createStudentFields = [
         label:"Final Roll Number",
         type:"number",
         placeholder: 'Example: 18010'
-    },
-    {
-        id:"batch",
-        label: 'Batch',
-        type: "text",
-        placeholder: 'Example: BSCS18'
     }
 ]
 

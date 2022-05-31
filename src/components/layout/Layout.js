@@ -151,7 +151,7 @@ function Layout(props) {
         maxHeight: '100vh',
         //backgroundImage: `url(${bg})`,
         color: 'white',
-        minWidth: {sm: 500,xs: 500, md: 700, lg: 1100, xl: 1800}
+        minWidth: {sm: 500,xs: 500, md: 700, lg: 1100, xl: 1700}
     
     }}
       >

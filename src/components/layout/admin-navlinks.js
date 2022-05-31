@@ -26,6 +26,10 @@ const adminNavbarLinks = [
     {
         name: "Profile",
         path: "/profile"
+    },
+    {
+        name: "Batch Management",
+        path: "/batch"
     }
 
 

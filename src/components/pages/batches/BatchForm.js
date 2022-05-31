@@ -5,32 +5,46 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
-import { useState } from 'react';
+import { useState,useContext } from 'react';
+import { DataContext } from '../../../context/DataContext';
 import useAxiosprivate from '../../../hooks/useAxiosPrivate';
 import Loading from '../../reusable-components/Loading';
 import ErrorMsg from '../../reusable-components/feedback/ErrorMsg';
 import { Container } from '@mui/material';
 import useFetch from '../../../hooks/useFetch';
 import MenuItem from '@mui/material/MenuItem';
+import { useForm } from 'react-hook-form';
+
 
 
 const text = "To Create Students in a range enter, the initial, final and prefix values. For example, if prefix is bscs, initial is 18001 and final is 18010, then students from 18001 to 18010 will be created."
 
-export default function StudentForm(props) {
+export default function BatchForm({update}) {
   
-    const {register, handleSubmit, setSuccess, url, fields, setMsg, errors} = props
+    const {updated, setUpdated} = update
     const axiosPrivate = useAxiosprivate()
     const [open, setOpen] = useState(false)
     const [error,setError] = useState('')
     const [isPending, setPending] = useState(false)
     const [department, setDepartment] = useState('Computer Science')
-    const [batch,setBatch] = useState('bscs18')
+    const { register, handleSubmit, formState: { errors: formError }} = useForm();
+
+    const {updateData} = useContext(DataContext)
+
+   
     
 
     //Fetching dropdowns
     const {apiData, loading, error: fetchError} = useFetch('/departments')
-    const {apiData: batches, loading: loadingBatches, error: batchError} =useFetch('/batch')
     
+    const batchFields = [
+        {
+            id:"batch",
+            label:"Batch",
+            type:"text",
+            placeholder: 'Example: bscs18'
+        },
+    ]
 
 
     
@@ -38,9 +52,6 @@ export default function StudentForm(props) {
         setDepartment(e.target.value)
     }
 
-    const handleChangeBatch = (e) => {
-        setBatch(e.target.value)
-    }
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -55,15 +66,18 @@ export default function StudentForm(props) {
 
 
     const onSubmit = async(data) => {
-        console.log(data);
+       
         setError('')
         try{
             setPending(true)
-            const addedResource = await axiosPrivate.post(url, data)
+            const addedResource = await axiosPrivate.post('/batch', data)
+            if(addedResource){
+                updateData('feedback', {success: true, successMsg: `${addedResource.data}`})
+              }
+            
             setPending(false)
-            setMsg(addedResource.data)
+            setUpdated(!updated)
             setOpen(false)
-            setSuccess(true)
         }catch(e){
             console.log(e)
             setError(e?.response?.data)
@@ -79,17 +93,17 @@ export default function StudentForm(props) {
     return (
         <div>
         <Button variant="outlined" onClick={handleClickOpen} sx={{marginBottom: '20px'}}>
-            Add New Students
+            Add a New Batch
         </Button>
         <Dialog open={open} onClose={handleClose}>
-            <DialogTitle>Add New Students</DialogTitle>
+            <DialogTitle>Add a New Batch</DialogTitle>
             <form onSubmit={handleSubmit(onSubmit)}>
                 <DialogContent>
                 <DialogContentText>
                     {text}
                 </DialogContentText>
                 
-                {fields.map((field)=>(
+                {batchFields.map((field)=>(
                 
                     <TextField
                         key={field.id}
@@ -124,36 +138,7 @@ export default function StudentForm(props) {
                         ))}
                     </TextField>
 
-                    <TextField
-                    id="batch"
-                    select
-                    fullWidth
-                    variant='standard'
-                    label='Batch'
-                    value={batch}
-                    {...register("batch")}
-                    onChange={handleChangeBatch}
-                    >
-                        {batches?.data?.map((batch)=>(
-
-                            <MenuItem key={batch.name} value={batch.name}>
-                            {batch.name}
-                            </MenuItem>
-                        ))}
-                    </TextField>
-
                     
-                    
-
-                
-                
-
-
-                
-                
-                
-
-
 
                 </DialogContent>
             
