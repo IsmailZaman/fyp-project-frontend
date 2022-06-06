@@ -7,28 +7,46 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
+import useFetch from '../hooks/useFetch';
 
-function createData(name, status) {
-  return { name,status};
+function DataRet()
+{
+  const {apiData, loading, error} = useFetch('/requests')
+  console.log(apiData, "heloooo", loading, error)
+  if (apiData)
+  {
+    rows=apiData.data.map((d)=>{
+      return createData(d.name,"status", d.creditHours)
+    })
+    
+  }
 }
 
-const rows = [
-  createData('Ismail','N/A'),
-  createData('SAM','N/A'),
-  createData('Balaj','N/A'),
+let rows = [
+  
+  
   
 ];
 
+function createData(name, status, temp) {
+  return { name,status, temp};
+  
+}
+
+
 export default function BasicTable() {
+  
+  DataRet()
   return (
-    <TableContainer sx={{maxWidth: 300, borderRadius:"12px"}} component={Paper}>
+    <TableContainer sx={{maxWidth: 1010, borderRadius:"12px"}} component={Paper}>
       <Table sx={{ minWidth: 300 }} aria-label="simple table">
         <TableHead>
         
           <TableRow>
             
-            <TableCell>Student Name</TableCell>
+            <TableCell>Course Name</TableCell>
             <TableCell align="right">Status</TableCell>
+            <TableCell align="right">Credit Hours</TableCell>
             
             
           </TableRow>
@@ -43,6 +61,7 @@ export default function BasicTable() {
                 {row.name}
               </TableCell>
               <TableCell align="right">{row.status}</TableCell>
+              <TableCell align="right">{row.temp}</TableCell>
               
               
             </TableRow>

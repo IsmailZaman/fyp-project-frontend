@@ -1,9 +1,8 @@
 import useAxiosprivate from "./useAxiosPrivate";
 import { useEffect,useState } from "react";
-//axios private
-
+ 
 const useFetch = (url) => {
-    
+   
     const [data, setData]=useState(null)
     const [loading, setLoading]=useState(false)
     const [error, setError]=useState(null)
