@@ -15,8 +15,19 @@ function DataRet()
   console.log(apiData, "heloooo", loading, error)
   if (apiData)
   {
-    rows=apiData.data.map((d)=>{
-      return createData(d.name,"status", d.creditHours)
+    rows=apiData.data.courses.map((d)=>{
+      if (d.pending)
+      {
+      return createData(d.course.name,"Pending", d.course.creditHours)
+      }
+      if (d.approved)
+      {
+      return createData(d.course.name,"Approved", d.course.creditHours)
+      }
+      if (d.enrolled)
+      {
+      return createData(d.course.name,"Enrolled", d.course.creditHours)
+      }
     })
     
   }
