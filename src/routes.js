@@ -16,6 +16,7 @@ import AddCoursesForm from './components/pages/sessions/CourseForm/AddCoursesFor
 import StudentProfile from './components/pages/profile/StudentProfile';
 import DataContextProvider from './context/DataContext';
 import Batch from './components/pages/batches/Batch';
+import EnrollmentForm from './components/student-pages/Enrollment/EnrollmentForm';
 
 
 
@@ -48,8 +49,13 @@ const AppRoutes = () => {
                                     <Route exact path="/addcourses" element = {<AddCoursesForm/>} />
                                     <Route exact path="/profile/:id" element = {<StudentProfile/>} />
                                     <Route exact path="batch" element = {<Batch/>} />
-
                                 </Route>
+
+
+                                <Route element={<RequireAuth allowedRoles={['student']}/>}>
+                                        <Route exact path="/enrollmentform" element = {<EnrollmentForm/>} />
+                                        
+                                </Route> 
                                 
                             </Route>
 

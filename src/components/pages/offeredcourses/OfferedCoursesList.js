@@ -17,7 +17,15 @@ const columns = [
       headerName: 'Session',
       flex: 0.5,
       minWidth: 150
+    },
+    {
+      field: 'creditHours',
+      headerName: 'Credit Hours',
+      flex: 0.5,
+      minWidth: 150
     }
+    
+
   ];
 
 
@@ -34,7 +42,8 @@ const columns = [
       rows = apiData.data.map((row)=>({
         id: row?._id,
         Name: row?.name,
-        Session: row?.Session
+        Session: row?.Session?.name,
+        creditHours: row?.creditHours
       }))
     }
 
