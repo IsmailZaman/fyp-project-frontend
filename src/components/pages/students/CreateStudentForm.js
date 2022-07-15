@@ -18,18 +18,16 @@ const text = "To Create Students in a range enter, the initial, final and prefix
 
 export default function StudentForm(props) {
   
-    const {register, handleSubmit, setSuccess, url, fields, setMsg, errors} = props
+    const {register, handleSubmit, setSuccess, url, fields, setMsg} = props
     const axiosPrivate = useAxiosprivate()
     const [open, setOpen] = useState(false)
     const [error,setError] = useState('')
     const [isPending, setPending] = useState(false)
     const [department, setDepartment] = useState('Computer Science')
     const [batch,setBatch] = useState('bscs18')
-    
-
     //Fetching dropdowns
-    const {apiData, loading, error: fetchError} = useFetch('/departments')
-    const {apiData: batches, loading: loadingBatches, error: batchError} =useFetch('/batch')
+    const {apiData} = useFetch('/departments')
+    const {apiData: batches} =useFetch('/batch')
     
 
 
@@ -55,7 +53,6 @@ export default function StudentForm(props) {
 
 
     const onSubmit = async(data) => {
-        console.log(data);
         setError('')
         try{
             setPending(true)
@@ -142,18 +139,7 @@ export default function StudentForm(props) {
                         ))}
                     </TextField>
 
-                    
-                    
-
                 
-                
-
-
-                
-                
-                
-
-
 
                 </DialogContent>
             

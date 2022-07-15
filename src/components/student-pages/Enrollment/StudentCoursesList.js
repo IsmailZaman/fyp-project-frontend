@@ -49,7 +49,7 @@ const StudentCoursesList = () =>{
   const[creditHours, setCreditHours] = useState(0)
   
 
-  const {apiData, loading, error} = useFetch('/offeredcourse/active')
+  const {apiData, loading, error} = useFetch('/offeredcourse/enrollment')
   let rows = []
   
   if(apiData){
@@ -89,20 +89,26 @@ const StudentCoursesList = () =>{
     setError('')
     try{
       setPending(true)
+
+
+
       const arrayOfIds = selectedCourses.map((course)=>{
-        return course.id
+        return {'course': course.id}
       })
-      // const addedResource = await axiosPrivate.post('/offeredcourse/add',{courses: arrayOfIds})
-      // if(!addedResource){
-      //   throw new Error('Unable to add resources')
-      // }
-      // if(addedResource){
-      //   updateData('feedback', {success: true, successMsg: `${addedResource.data}`})
-      // }
+      console.log(arrayOfIds)
+      
+     
+      const addedResource = await axiosPrivate.post('/requests/create',{courses: arrayOfIds})
+      if(!addedResource){
+        throw new Error('Unable to add resources')
+      }
+      if(addedResource){
+        updateData('feedback', {success: true, successMsg: 'New enrollment request created.'})
+      }
 
       setSelectedCourses([])
       setPending(false)
-      return navigate("/offeredcourses", { replace: true });
+      return navigate("/", { replace: true });
     }catch(e){
       console.log(e)
       setError(e?.response?.data)

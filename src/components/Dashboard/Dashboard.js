@@ -1,6 +1,7 @@
 import useAuth from "../../hooks/useAuth";
 import StudentDashboard from "./StudentDashboard";
 import AdminDashboard from "./AdminDashboard";
+import AdvisorDashboard from "./AdvisorDashboard";
 
 
 
@@ -13,7 +14,9 @@ const Dashboard = () => {
     if(auth?.roles.includes('student')){
         return <StudentDashboard />
     }
-
+    if(auth?.roles?.includes('advisor')){
+        return <AdvisorDashboard />
+    }
 
     
     

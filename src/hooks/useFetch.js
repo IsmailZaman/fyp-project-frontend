@@ -7,6 +7,7 @@ const useFetch = (url) => {
     const [loading, setLoading]=useState(false)
     const [error, setError]=useState(null)
     const axiosPrivate = useAxiosprivate()
+    const [refresh, setRefresh] = useState({})
 
     useEffect(()=>{
         
@@ -26,10 +27,10 @@ const useFetch = (url) => {
         fetchData()
 
         return ()=>{}
+        
+    },[url, refresh])
 
-    },[url])
-
-    return {apiData: data,loading,error}
+    return {apiData: data,loading,error, setRefresh}
 
 
 

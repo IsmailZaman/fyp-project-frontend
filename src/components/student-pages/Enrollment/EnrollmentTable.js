@@ -7,11 +7,6 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import {useEffect, useState} from 'react'
 
-function createData(name, calories, fat, carbs, protein) {
-  return { name, calories, fat, carbs, protein };
-}
-
-
 
 export default function EnrollmentTable({data}) {
     const [rows, setRows] = useState(data)

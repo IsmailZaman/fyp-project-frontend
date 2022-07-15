@@ -18,7 +18,7 @@ const StudentProfile = () => {
         <Layout navlinks={adminNavbarLinks}>
             {loading && <Loading/>}
             {error && <div>Error In loading data.</div>}
-            {apiData && <StudentProfileCard data={apiData.data} title={`${apiData?.data?.rollNumber}'s Profile`} url="/users/changepassword"/>}
+            {apiData && <StudentProfileCard data={apiData.data} title={`${apiData?.data?.rollNumber ? apiData.data.rollNumber : apiData?.data?.name}'s Profile`} url="/users/changepassword"/>}
         </Layout>
         </>
      );

@@ -30,6 +30,10 @@ const adminNavbarLinks = [
     {
         name: "Batch Management",
         path: "/batch"
+    },
+    {
+        name: "Advisor Management",
+        path: "/advisors"
     }
 
 

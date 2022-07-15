@@ -17,6 +17,8 @@ import StudentProfile from './components/pages/profile/StudentProfile';
 import DataContextProvider from './context/DataContext';
 import Batch from './components/pages/batches/Batch';
 import EnrollmentForm from './components/student-pages/Enrollment/EnrollmentForm';
+import Advisor from './components/pages/advisor/Advisor';
+import StudentRequests from './components/advisor-pages/enrollment/StudentRequests';
 
 
 
@@ -35,7 +37,7 @@ const AppRoutes = () => {
                             {/*Private Routes */}
                             <Route element={<PersistLogin />}>
                                 
-                                <Route element={<RequireAuth allowedRoles={['admin','student']}/>}>
+                                <Route element={<RequireAuth allowedRoles={['admin','student','advisor']}/>}>
                                         <Route exact path="/dashboard" element = {<Dashboard />} />
                                         <Route exact path="/profile" element={<Profile/>}/>
                                 </Route> 
@@ -49,6 +51,7 @@ const AppRoutes = () => {
                                     <Route exact path="/addcourses" element = {<AddCoursesForm/>} />
                                     <Route exact path="/profile/:id" element = {<StudentProfile/>} />
                                     <Route exact path="batch" element = {<Batch/>} />
+                                    <Route exact path='/advisors' element ={<Advisor />} />
                                 </Route>
 
 
@@ -57,6 +60,12 @@ const AppRoutes = () => {
                                         
                                 </Route> 
                                 
+                                <Route element={<RequireAuth allowedRoles={['advisor']} />}>
+                                        <Route exact path="student/requests" element={<StudentRequests />} />
+                                </Route>
+
+
+                                <Route path="*" element={<div>404 Page not found.</div>}/>
                             </Route>
 
                         </Routes>

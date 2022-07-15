@@ -4,6 +4,7 @@ import useFetch from "../../../hooks/useFetch";
 import Loading from "../../reusable-components/Loading";
 import adminNavbarLinks from "../../layout/admin-navlinks";
 import studentNavbarLinks from "../../layout/student-navlinks"
+import advisorNavbarLinks from "../../layout/advisor-navlinks";
 import useAuth from "../../../hooks/useAuth";
 import StudentProfileCard from "./StudentProfileCard";
 
@@ -16,7 +17,7 @@ const Profile = () => {
 
     return ( 
         <>
-        <Layout navlinks={auth?.roles?.includes('admin') ? adminNavbarLinks : studentNavbarLinks}>
+        <Layout navlinks={auth?.roles?.includes('admin') ? adminNavbarLinks : auth?.roles?.includes('student') ? studentNavbarLinks : advisorNavbarLinks }>
             {loading && <Loading/>}
             {error && <div>Error In loading data.</div>}
             {apiData && (auth?.roles?.includes('admin') ? 

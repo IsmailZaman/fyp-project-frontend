@@ -6,15 +6,15 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import useFetch from '../hooks/useFetch';
 import Loading from './reusable-components/Loading';
+import { useNavigate } from 'react-router-dom';
 
 
 
 
 const EnrollmentCard = () => {
+    const navigate = useNavigate()
     const {loading,apiData, error} = useFetch('/session/active')
-    if(apiData){
-        console.log(apiData.data)
-    }
+    
 
     
 
@@ -39,7 +39,7 @@ const EnrollmentCard = () => {
                     </Typography>
                 </CardContent>
                 <CardActions>
-                    <Button variant="contained" sx={{ width: "25%", height: "5vh", borderRadius: "12px" }}>ENROLL</Button>
+                    <Button onClick={()=>navigate('/enrollmentform')} variant="contained" sx={{ width: "25%", height: "5vh", borderRadius: "12px" }}>ENROLL</Button>
                 </CardActions>
             </React.Fragment>
             }
