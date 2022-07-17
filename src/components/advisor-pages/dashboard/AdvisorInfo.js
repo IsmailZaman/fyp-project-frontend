@@ -19,11 +19,12 @@ export default function AdvisorInfo({advisorData}) {
     const rows = []
     if(advisorData && apiData){
         
-        const batches = advisorData[0]?.batch?.map((record)=>record?.name)
+        const batches = advisorData?.batch?.map((record)=>record?.name)
+        console.log(advisorData.batch)
 
         rows.push(createData("Your batches", batches?.length > 0 ? batches?.toString() : 'No batch assigned yet.'))
-        rows.push(createData("Requests resolved",  apiData?.data?.pending))
-        rows.push(createData("Pending requests",  apiData?.data?.closed))
+        rows.push(createData("Requests pending",  apiData?.data?.pending))
+        rows.push(createData("Requests resolved",  apiData?.data?.closed))
     }
   return (
     <>

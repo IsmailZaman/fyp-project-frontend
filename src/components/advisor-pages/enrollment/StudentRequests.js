@@ -1,11 +1,14 @@
 import Layout from "../../layout/Layout";
 import advisorNavbarLinks from "../../layout/advisor-navlinks";
-import AdvisorBatches from "./AdvisorBatches";
+import StudentRequestsGrid from "./StudentRequestsList";
+
 
 
 const StudentRequests = () => {
+   
+
     return (<Layout navlinks={advisorNavbarLinks} title="Student Requests">
-        <AdvisorBatches />
+        <StudentRequestsGrid />
     </Layout> );
 }
  

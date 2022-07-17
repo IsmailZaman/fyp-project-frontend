@@ -36,6 +36,9 @@ const EnrollmentCard = () => {
                     </Typography>
                     <Typography variant="body2" align="left">
                         {`Deadline - ${new Date(apiData?.data?.enrollmentPeriod)?.toDateString()}`}
+                        <br />
+                        {`Time: ${new Date(apiData?.data?.enrollmentPeriod).toLocaleTimeString('en',
+                        { timeStyle: 'short', hour12: true, timeZone: 'UTC' })}`}
                     </Typography>
                 </CardContent>
                 <CardActions>

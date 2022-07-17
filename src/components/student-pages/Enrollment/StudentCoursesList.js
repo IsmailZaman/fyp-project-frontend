@@ -98,7 +98,7 @@ const StudentCoursesList = () =>{
       console.log(arrayOfIds)
       
      
-      const addedResource = await axiosPrivate.post('/requests/create',{courses: arrayOfIds})
+      const addedResource = await axiosPrivate.post('/requests/create',{courses: arrayOfIds, creditHours})
       if(!addedResource){
         throw new Error('Unable to add resources')
       }

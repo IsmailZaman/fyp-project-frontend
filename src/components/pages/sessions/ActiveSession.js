@@ -1,4 +1,4 @@
-import { Typography } from "@mui/material";
+import { TextField, Typography } from "@mui/material";
 import Container from "@mui/material/Container";
 import Button from '@mui/material/Button';
 import { useState } from "react";
@@ -21,6 +21,7 @@ import { useNavigate } from "react-router-dom";
 
 
 
+
   
   
 
@@ -35,12 +36,59 @@ const ActiveSession = (props) => {
     const axiosPrivate = useAxiosprivate()
     const navigate = useNavigate()
 
+    function createData(field, value) {
+      return { field, value };
+    }
+
+    //editing deadline states
+    const [openDeadlineModal, setDeadlineOpen] = useState(false)
+    const [date, setDate] = useState('')
+    const [dateError, setDateError] = useState('')
+    const [isPendingUpdate, setPendingUpdate] = useState(false)
+
+  
+
+    //handles date change
+    const handleDateChange = (e) =>{
+      setDate(e.target.value)
+    }
+
+    //handles the button for editing deadline
+    const handleOpenDeadline = () => {
+      setDeadlineOpen(true)
+    }
+
+    const handleCloseDeadline = () =>{
+      setDateError('')
+      setDeadlineOpen(false)
+    }
+
+    const handleDeadlineEdit = async() =>{
+      try{
+        setPendingUpdate(true)
+        if(date === '') throw new Error('No value for date')
+        await axiosPrivate.patch('/session/update', {enrollmentPeriod: date})
+        setPendingUpdate(false)
+        setDeadlineOpen(false)
+        setDateError('')
+        window.location.reload()
+      }catch(e){
+        if(!e?.response){
+          setDateError('Server not responding')
+        }
+        else{
+          setDateError(e?.response?.data)
+        }
+      }finally{
+        setPendingUpdate(false)
+      }
+    }
+
+
    
 
-    function createData(field, value) {
-        return { field, value };
-      }
 
+    //handles button for finishing the session
     const handleClickOpen = () => {
         setOpen(true);
     };
@@ -76,7 +124,8 @@ const ActiveSession = (props) => {
     if(sessionData){
         rows.push(createData("Session", sessionData.name))
         rows.push(createData("Academic Year", sessionData.academicYear))
-        const date = sessionData.enrollmentPeriod.split('T')[0]
+        const date = sessionData.enrollmentPeriod.split('T')[0] + ` (${new Date(sessionData?.enrollmentPeriod).toLocaleTimeString('en',
+        { timeStyle: 'short', hour12: true, timeZone: 'UTC' })})`
         rows.push(createData("Enrollment Deadline", date))
         rows.push(createData("Number of courses offered", sessionData.coursesOffered.length))
         rows.push(createData("Status", sessionData.status? "active" : "inactive"))
@@ -134,31 +183,78 @@ const ActiveSession = (props) => {
                 }}
                  size="large"
                  onClick={()=>navigate('/addcourses')}>Add Courses</Button>
+
+        <Button startIcon={<EditIcon />} sx={{
+                    ml: 4,
+                    color: "black",
+                    backgroundColor: ""
+                }}
+                 size="large"
+                 onClick={handleOpenDeadline}>Edit Deadline</Button>
+
+
+
         </div>
         <Dialog open={open} onClose={handleClose}>
-        <DialogContent>
-          <DialogContentText>
-            Are you sure you want to end {sessionData.name} session ?
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          {!isPending && (<>
-            <Button onClick={handleClose}>Cancel</Button>
-            <Button onClick={handleSubmit}>Finish</Button>
-            </>
-          )}
-          {isPending && <Loading/>}
-          
-        </DialogActions>
+          <DialogContent>
+            <DialogContentText>
+              Are you sure you want to end {sessionData.name} session ?
+            </DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            {!isPending && (<>
+              <Button onClick={handleClose}>Cancel</Button>
+              <Button onClick={handleSubmit}>Finish</Button>
+              </>
+            )}
+            {isPending && <Loading/>}
+            
+          </DialogActions>
 
-          {error !== '' && 
-          <Container>
-             <ErrorMsg msg={error}/>
-          </Container> 
-          
-          }
-          
-      </Dialog>
+            {error !== '' && 
+            <Container>
+              <ErrorMsg msg={error}/>
+            </Container> 
+            }  
+        </Dialog>
+
+
+        {/* lets you edit the deadline */}
+        <Dialog open={openDeadlineModal} onClose={handleCloseDeadline}>
+          <DialogContent sx={{minWidth: 400}}>
+            <DialogContentText>
+              Edit deadline for this session
+            </DialogContentText>
+            <form>
+              <TextField
+                key={1}
+                id= 'date'
+                label= 'deadline'
+                type= 'datetime-local'
+                fullWidth
+                variant='standard'
+                onChange={handleDateChange}
+                
+              />
+            </form>
+          </DialogContent>
+          <DialogActions>
+            {!isPendingUpdate && (<>
+              <Button onClick={handleCloseDeadline}>Cancel</Button>
+              <Button onClick={handleDeadlineEdit}>Confirm</Button>
+              </>
+            )}
+            {isPendingUpdate && <Loading/>}
+            
+          </DialogActions>
+
+            {dateError !== '' && 
+            <Container>
+              <ErrorMsg msg={dateError}/>
+            </Container> 
+            }  
+        </Dialog>
+        
         
         </>
     );

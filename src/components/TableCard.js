@@ -7,9 +7,19 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import useFetch from '../hooks/useFetch';
+import IconButton from '@mui/material/IconButton';
+import ClearOutlinedIcon from '@mui/icons-material/ClearOutlined';
 
-function DataRet()
-{
+let rows = [];
+
+function createData(name, status, temp) {
+  return { name,status, temp};
+  
+}
+
+
+export default function BasicTable() {
+
   const {apiData, loading, error} = useFetch('/requests')
   console.log(apiData, "heloooo", loading, error)
   if (apiData)
@@ -30,23 +40,6 @@ function DataRet()
     })
     
   }
-}
-
-let rows = [
-  
-  
-  
-];
-
-function createData(name, status, temp) {
-  return { name,status, temp};
-  
-}
-
-
-export default function BasicTable() {
-  
-  DataRet()
   return (
     <TableContainer sx={{maxWidth: 1010, borderRadius:"12px"}} component={Paper}>
       <Table sx={{ minWidth: 300 }} aria-label="simple table">
@@ -54,13 +47,16 @@ export default function BasicTable() {
         
           <TableRow>
             
+            
             <TableCell>Course Name</TableCell>
             <TableCell align="right">Status</TableCell>
             <TableCell align="right">Credit Hours</TableCell>
+            <TableCell align="right">Drop</TableCell>
             
             
           </TableRow>
         </TableHead>
+        { apiData &&
         <TableBody>
           {rows.map((row) => (
             <TableRow
@@ -72,11 +68,19 @@ export default function BasicTable() {
               </TableCell>
               <TableCell align="right">{row.status}</TableCell>
               <TableCell align="right">{row.temp}</TableCell>
+              <TableCell align="right">
+                <IconButton tooltip="Description here" sx={{maxWidth: '30px', maxHeight: '30px'}}>
+                    <ClearOutlinedIcon />
+                </IconButton>
+              </TableCell>
+              
+              
               
               
             </TableRow>
           ))}
         </TableBody>
+        }
       </Table>
     </TableContainer>
   );

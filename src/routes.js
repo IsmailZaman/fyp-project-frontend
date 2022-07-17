@@ -19,6 +19,8 @@ import Batch from './components/pages/batches/Batch';
 import EnrollmentForm from './components/student-pages/Enrollment/EnrollmentForm';
 import Advisor from './components/pages/advisor/Advisor';
 import StudentRequests from './components/advisor-pages/enrollment/StudentRequests';
+import RequestPage from './components/advisor-pages/enrollment/requests/RequestPage';
+
 
 
 
@@ -60,8 +62,9 @@ const AppRoutes = () => {
                                         
                                 </Route> 
                                 
-                                <Route element={<RequireAuth allowedRoles={['advisor']} />}>
-                                        <Route exact path="student/requests" element={<StudentRequests />} />
+                                <Route element={<RequireAuth allowedRoles={['advisor','admin']} />}>
+                                        <Route exact path="requests/pending" element={<StudentRequests />} />
+                                        <Route exact path="requests/:id" element={<RequestPage />} />
                                 </Route>
 
 
