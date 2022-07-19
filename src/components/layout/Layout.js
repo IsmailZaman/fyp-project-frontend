@@ -20,6 +20,7 @@ import { CardMedia } from '@mui/material';
 import logo1 from './logo1.png'
 import ProfileMenu from './ProfileMenu';
 import {useNavigate } from 'react-router-dom';
+import background from "../Dashboard/SimpleShiny.png";
 
 
 const drawerWidth = 240;
@@ -80,7 +81,7 @@ function Layout(props) {
   const container = window !== undefined ? () => window().document.body : undefined;
 
   return (
-    <Box sx={{ display: 'flex' }}>
+    <Box sx={{ display: 'flex'}}>
       <CssBaseline />
       <AppBar
         position="fixed"
