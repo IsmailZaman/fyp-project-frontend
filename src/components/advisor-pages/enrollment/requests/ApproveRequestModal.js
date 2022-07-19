@@ -18,7 +18,7 @@ export default function ApproveRequestModal() {
   return (
     <div style={{width: '45%'}}>
       <Button variant="outlined" onClick={handleClickOpen}>
-        Approve
+        Confirm
       </Button>
       <Dialog
         open={open}

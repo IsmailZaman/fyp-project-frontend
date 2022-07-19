@@ -1,7 +1,7 @@
 import {Bar} from 'react-chartjs-2';
 import {popCourses} from '../chartData';
 import  {useState} from 'react';
-import {Chart as ChartJS} from 'chart.js/auto';
+
 
 
 const BarChart = () => {

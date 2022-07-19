@@ -6,7 +6,6 @@ import Button from '@mui/material/Button';
 
 const renderRequestButton = (params) => {
   
-  
   return (
       <strong>
           <Button
@@ -62,6 +61,7 @@ export default function StudentRequestsGrid() {
   let rows = []
   
   if(apiData){
+    console.log(apiData.data)
     rows = apiData.data.map((row)=>({
       id: row?.id,
       email: row?.email,

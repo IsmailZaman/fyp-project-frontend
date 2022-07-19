@@ -11,9 +11,6 @@ const AdvisorDashboard = () => {
 
     const {apiData,loading} = useFetch('/session/active')
     const {apiData: advisorSessionData, loading: loadingAdvisor} = useFetch('/advisor/sessiondata')
-    if(advisorSessionData){
-        console.log(advisorSessionData.data)
-    }
 
     return ( <Layout navlinks={advisorNavbarLinks}>
         <Stack spacing={4}>

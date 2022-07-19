@@ -4,8 +4,8 @@ import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import useFetch from '../hooks/useFetch';
-import Loading from './reusable-components/Loading';
+import useFetch from '../../hooks/useFetch';
+import Loading from '../reusable-components/Loading';
 import { useNavigate } from 'react-router-dom';
 
 

@@ -21,13 +21,13 @@ export default function RejectRequestModal() {
   return (
     <div style={{width: '45%'}}>
       <Button variant="outlined" onClick={handleClickOpen}>
-        Reject
+        Message
       </Button>
       <Dialog open={open} onClose={handleClose}>
-        <DialogTitle>Reject</DialogTitle>
+        <DialogTitle>Message</DialogTitle>
         <DialogContent>
           <DialogContentText>
-            Please mention the reason for rejecting this request
+            Please enter your message to student below
           </DialogContentText>
           <TextField
             autoFocus
@@ -41,7 +41,7 @@ export default function RejectRequestModal() {
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
-          <Button onClick={handleClose}>Reject</Button>
+          <Button onClick={handleClose}>Send</Button>
         </DialogActions>
       </Dialog>
     </div>

@@ -1,5 +1,4 @@
 import Layout from "../layout/Layout";
-import DashboardCard from "../reusable-components/DashboardCard";
 import adminNavbarLinks from  "../layout/admin-navlinks";
 import useFetch from '../../hooks/useFetch';
 import Card from '@mui/material/Card';
@@ -12,11 +11,7 @@ import BookIcon from '@mui/icons-material/Book';
 import EventAvailableIcon from '@mui/icons-material/EventAvailable';
 import AddToQueueIcon from '@mui/icons-material/AddToQueue';
 import background from "./SimpleShiny.png";
-import {Bar} from 'react-chartjs-2';
-import {popCourses} from './chartData';
-import {Chart as ChartJS} from 'chart.js/auto';
-import  {useState} from 'react';
-import {Pie} from 'react-chartjs-2';
+
 import BarChart from "./Charts/BarChart";
 import PieChart from "./Charts/PieChart";
 

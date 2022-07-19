@@ -4,6 +4,10 @@ const advisorNavbarLinks = [
         path: "/dashboard"
     },
     {
+        name: "Requests",
+        path: "/requests/pending"
+    },
+    {
         name: "Profile",
         path: "/profile"
     }

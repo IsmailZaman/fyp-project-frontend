@@ -1,7 +1,7 @@
 import Layout from "../layout/Layout"
 import studentNavbarLinks from "../layout/student-navlinks"
-import EnrollmentCard from "../EnrollmentCard";
-import TableCard from "../TableCard";
+import EnrollmentCard from "../student-pages/EnrollmentCard";
+import TableCard from "../student-pages/TableCard";
 import { Typography } from "@mui/material";
 import { DataContext } from "../../context/DataContext";
 import { useContext,useEffect, useState } from "react";
