@@ -3,10 +3,14 @@ import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogTitle from '@mui/material/DialogTitle';
+import useAxiosprivate from '../../../../hooks/useAxiosPrivate';
 
-export default function ApproveRequestModal() {
+export default function ApproveRequestModal({rows}) {
   const [open, setOpen] = useState(false);
+  const [submitError,setSubmitError] = useState('')
+  const [isPending, setPending] = useState(false)
 
+  const axiosPrivate = useAxiosprivate()
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -14,6 +18,14 @@ export default function ApproveRequestModal() {
   const handleClose = () => {
     setOpen(false);
   };
+
+  const onSubmit = async() =>{
+    
+
+
+
+
+  }
 
   return (
     <div style={{width: '45%'}}>
@@ -28,6 +40,7 @@ export default function ApproveRequestModal() {
       >
         <DialogTitle id="alert-dialog-title">
           Are you sure you approve this request?
+          
         </DialogTitle>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>

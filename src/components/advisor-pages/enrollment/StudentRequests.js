@@ -8,7 +8,7 @@ const StudentRequests = () => {
    
 
     return (<Layout navlinks={advisorNavbarLinks} title="Student Requests">
-        <StudentRequestsGrid />
+        <StudentRequestsGrid url={'/advisor/student/requests'} />
     </Layout> );
 }
  

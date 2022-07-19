@@ -54,9 +54,9 @@ const columns = [
 
 
 
-export default function StudentRequestsGrid() {
+export default function StudentRequestsGrid({url}) {
 
-  const {apiData, loading, error} = useFetch('/advisor/student/requests')
+  const {apiData, loading, error} = useFetch(url)
 
   let rows = []
   
