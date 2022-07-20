@@ -64,7 +64,7 @@ export default function StudentRequestsGrid({url}) {
     console.log(apiData.data)
     rows = apiData.data.map((row)=>({
       id: row?.id,
-      email: row?.email,
+      email: row?.rollNumber+'@itu.edu.pk',
       rollNumber: row?.rollNumber,
       batch: row?.batch,
       department: row?.department

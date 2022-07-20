@@ -5,7 +5,7 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogTitle from '@mui/material/DialogTitle';
 import useAxiosprivate from '../../../../hooks/useAxiosPrivate';
 
-export default function ApproveRequestModal({rows}) {
+export default function ApproveRequestModal({data}) {
   const [open, setOpen] = useState(false);
   const [submitError,setSubmitError] = useState('')
   const [isPending, setPending] = useState(false)
@@ -20,7 +20,7 @@ export default function ApproveRequestModal({rows}) {
   };
 
   const onSubmit = async() =>{
-    
+
 
 
 
@@ -40,6 +40,8 @@ export default function ApproveRequestModal({rows}) {
       >
         <DialogTitle id="alert-dialog-title">
           Are you sure you approve this request?
+          {console.log(data)}
+          
           
         </DialogTitle>
         <DialogActions>

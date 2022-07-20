@@ -17,13 +17,14 @@ const data = {}
 
 
 export default function StudentRequestProfileCard({studentId}) {
-  const {apiData, loading, error} = useFetch(`/users/students/${studentId}`)
+  const {apiData, loading, error} = useFetch(`/studentdata/${studentId}`)
+
 
   if(apiData?.data){
-    data['email'] = apiData?.data?.email
-    data['batch'] = apiData?.data?.studentData?.batch
-    data['department'] = apiData?.data?.studentData?.department
-    data['rollNumber'] = apiData?.data?.studentData?.rollNumber
+    data['email'] = apiData?.data?.rollNumber + '@itu.edu.pk'
+    data['batch'] = apiData?.data?.batch
+    data['department'] = apiData?.data?.department
+    data['rollNumber'] = apiData?.data?.rollNumber
   }
 
 

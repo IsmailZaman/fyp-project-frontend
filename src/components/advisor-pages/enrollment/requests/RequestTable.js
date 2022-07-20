@@ -9,7 +9,7 @@ import RejectRequestModal from './RejectRequestModal';
 import IconButton from '@mui/material/IconButton';
 import ClearOutlinedIcon from '@mui/icons-material/ClearOutlined';
 import TaskAltIcon from '@mui/icons-material/TaskAlt';
-import { useState } from 'react';
+
 const renderRejectButton = (params) => {
   
     return (
@@ -116,7 +116,7 @@ export default function RequestTable({requestId}) {
             <StudentRequestProfileCard studentId={apiData?.data?.student} />
             {/* {<h5 style={{marginBottom: '16px', marginTop: '16px'}}>{totalCreditHours !== 0 && `Total credit hours approved: ${totalCreditHours}`}</h5>} */}
             <Box sx={{display: 'flex', justifyContent: 'space-around'}}>
-                <ApproveRequestModal rows={rows}/>
+                <ApproveRequestModal data={apiData.data}/>
                 <RejectRequestModal />
             </Box>
         </Box>
