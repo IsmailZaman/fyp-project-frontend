@@ -38,8 +38,28 @@ const renderAssignButton = (params) => {
 }
 
 
+const renderRequestButton = (params) => {
+  console.log(params)
+  return (
+      <strong>
+          <Button
+              variant="contained"
+              color="primary"
+              size="small"
+              style={{ marginLeft: 16 }}
+              onClick={(e) => {
+                  e.preventDefault();
+                  window.location.href=`http://localhost:5000/advisors/requests/${params?.row?.advisorData?._id}`;
+              }}
+          >
+              Requests
+          </Button>
+      </strong>
+  )
+}
+
 const columns = [
-  { field: 'id', headerName: 'ID', width: 90, flex:0.5 },
+  // { field: 'id', headerName: 'ID', width: 90, flex:0.2 },
   {
     field: 'Name',
     headerName: 'Name',
@@ -59,12 +79,14 @@ const columns = [
     field: 'Profile',
     width: 150,
     renderCell: renderProfileButton,
+  },
+
+  {
+    field: 'Enrollment Requests',
+    width: 200,
+    renderCell: renderRequestButton,
   }
-
 ];
-
-
-
 
 
 export default function AdvisorDataGrid() {
@@ -92,7 +114,8 @@ export default function AdvisorDataGrid() {
     rows = apiData.data.map((row)=>({
       id: row?._id,
       Name: row?.name,
-      Email: row?.email
+      Email: row?.email,
+      advisorData: row?.advisorData
     }))
   }
   
@@ -107,6 +130,6 @@ export default function AdvisorDataGrid() {
       {loading && <Loading/>}
       {error && <h1>Failed to Fetch Data</h1>}
     </div>
-    
+
   );
 }

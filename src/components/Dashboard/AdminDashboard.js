@@ -124,7 +124,7 @@ const AdminDashboard = () => {
                
                <div style={{marginLeft: '45px'}}>
                <Typography gutterBottom variant="h5" component="div" align="left">
-                     Enrollment:  
+                     Pending:  
                   </Typography>
                   
 

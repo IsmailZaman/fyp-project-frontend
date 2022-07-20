@@ -20,6 +20,7 @@ import EnrollmentForm from './components/student-pages/Enrollment/EnrollmentForm
 import Advisor from './components/pages/advisor/Advisor';
 import StudentRequests from './components/advisor-pages/enrollment/StudentRequests';
 import RequestPage from './components/advisor-pages/enrollment/requests/RequestPage';
+import AdvisorRequests from './components/pages/advisor/advisorRequests/AdvisorRequests';
 
 
 
@@ -54,6 +55,8 @@ const AppRoutes = () => {
                                     <Route exact path="/profile/:id" element = {<StudentProfile/>} />
                                     <Route exact path="batch" element = {<Batch/>} />
                                     <Route exact path='/advisors' element ={<Advisor />} />
+                                    <Route exact path='/advisors/requests/:advisorId' element ={<AdvisorRequests />} />
+
                                 </Route>
 
 
