@@ -11,9 +11,14 @@ import BookIcon from '@mui/icons-material/Book';
 import EventAvailableIcon from '@mui/icons-material/EventAvailable';
 import AddToQueueIcon from '@mui/icons-material/AddToQueue';
 import background from "./SimpleShiny.png";
-
 import BarChart from "./Charts/BarChart";
 import PieChart from "./Charts/PieChart";
+import { useState } from "react";
+import Box from '@mui/material/Box';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
 
 
 
@@ -28,7 +33,14 @@ const AdminDashboard = () => {
 
    const {apiData: enrollmentRequestData, loading: loadingEnrollmentRequestData, error: enrollmentRequestError} = useFetch('/requests/unresolved')
 
+   const {apiData: deptData, loading:loadingDeptData , error:deptError } = useFetch('/departments')
+
+   const [department,setDepartment ]= useState('');
    
+   const handleChange = (event) => {
+      setDepartment(event.target.value);
+    };
+  
     return ( 
       <div style={{ backgroundImage: `url(${background})`, backgroundSize:'cover',width: '95%',
       height: '800px', }}>
@@ -126,7 +138,6 @@ const AdminDashboard = () => {
                <Typography gutterBottom variant="h5" component="div" align="left">
                      Pending:  
                   </Typography>
-                  
 
                   <Typography gutterBottom variant="h4" component="div" align="left" >
                      {loadingEnrollmentRequestData && <Loading/>}
@@ -138,11 +149,26 @@ const AdminDashboard = () => {
                <Button size="large"  sx={{ color: 'white', backgroundColor: '#3F51B5', borderColor: 'blue' }}>Enrollment requests</Button>
                </CardActions>
             </Card>
+
             <div style={{maxWidth: '600px',minHeight:'380px', minWidth: '600px', maxHeight:'400px'}}> 
-         
+            <FormControl fullWidth>
+         <InputLabel id="demo-simple-select-label">Department</InputLabel>
+            <Select
+               labelId="demo-simple-select-label"
+               id="dept"
+               value={department}
+               onChange={handleChange}
+
+            >
+               {deptData?.data?.map((dept)=>(
+               <MenuItem key={dept.name} value={dept.name}>
+               {dept.name}
+               </MenuItem>
+               ))}
+            </Select>
+         </FormControl>
             <BarChart />
             </div>
-
 
             <div style={{maxWidth: '600px',minHeight:'380px', minWidth: '600px', maxHeight:'400px', marginLeft:'30px'}}> 
             <PieChart/>
@@ -153,8 +179,6 @@ const AdminDashboard = () => {
         </Layout>
         </div>
       
-
-        
      );
 }
 
