@@ -57,11 +57,10 @@ const columns = [
 export default function StudentRequestsGrid({url}) {
 
   const {apiData, loading, error} = useFetch(url)
-
   let rows = []
   
   if(apiData){
-    console.log(apiData.data)
+    //console.log(apiData.data)
     rows = apiData.data.map((row)=>({
       id: row?.id,
       email: row?.rollNumber + '@itu.edu.pk',

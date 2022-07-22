@@ -2,6 +2,29 @@ import { Box } from '@mui/material';
 import { DataGrid, GridToolbar } from '@mui/x-data-grid';
 import useFetch from '../../../hooks/useFetch';
 import Loading from '../../reusable-components/Loading';
+import { Button } from '@mui/material';
+
+
+
+const renderEnrolledButton = (params) => {
+  console.log(params)
+  return (
+      <strong>
+          <Button
+              variant="contained"
+              color="primary"
+              size="small"
+              style={{ marginLeft: 16 }}
+              onClick={(e) => {
+                  e.preventDefault();
+                 window.location.href=`http://localhost:5000/offeredcourses/enrolled/students/${params?.row?.id}`;
+              }}
+          >
+              Students
+          </Button>
+      </strong>
+  )
+}
 
 
 const columns = [
@@ -23,17 +46,29 @@ const columns = [
       headerName: 'Credit Hours',
       flex: 0.5,
       minWidth: 150
-    }
-    
+    },
+    {
+      field: 'NoOfStudents',
+      headerName: 'No. of Enrolled Students',
+      flex: 0.5,
+      minWidth: 150
+    },
+    {
+      field: 'Enrolled',
+      headerName: 'Enrolled Students',
+      flex: 0.5,
+      minWidth: 150,
+      renderCell: renderEnrolledButton,
+    },
+   
 
   ];
 
 
-  export default function OfferedCoursesGrid() {
   
 
-
-
+  export default function OfferedCoursesGrid() {
+  
     const {apiData, loading, error} = useFetch('/offeredcourse/active')
     let rows = []
     
@@ -43,11 +78,11 @@ const columns = [
         id: row?._id,
         Name: row?.name,
         Session: row?.Session?.name,
-        creditHours: row?.creditHours
+        creditHours: row?.creditHours,
+        NoOfStudents:row?.enrolledStudents.length,
+
       }))
     }
-
-
   
     return (
       
