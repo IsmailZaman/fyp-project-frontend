@@ -139,6 +139,7 @@ const AdminDashboard = () => {
                </CardActions>
             </Card>
             <div style={{maxWidth: '600px',minHeight:'380px', minWidth: '600px', maxHeight:'400px'}}> 
+         
             <BarChart />
             </div>
 

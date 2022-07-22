@@ -21,7 +21,7 @@ const renderRejectButton = (params) => {
                 size="small"
                 style={{ marginLeft: 16 }}
                 onClick={()=>{
-                    if(params.row.status !== 'Approved'){
+                    if(params.row.status === 'Pending' || params.row.status ==='Rejected'){
                         params.row.status = 'Approved'
                     }
                     
@@ -44,7 +44,12 @@ const renderAcceptButton = (params) => {
                 color="primary"
                 size="small"
                 style={{ marginLeft: 16 }}
-                onClick={()=>params.row.status = 'Rejected'}
+                onClick={()=>{
+                    if(params.row.status === 'Pending' || params.row.status === 'Approved'){
+                    params.row.status = 'Rejected'
+                    }
+                
+                }}
             >
              <ClearOutlinedIcon />
             </IconButton>
@@ -119,7 +124,7 @@ export default function RequestTable({requestId}) {
             {/* {<h5 style={{marginBottom: '16px', marginTop: '16px'}}>{totalCreditHours !== 0 && `Total credit hours approved: ${totalCreditHours}`}</h5>} */}
             {auth?.roles?.includes('advisor') &&
             <Box sx={{display: 'flex', justifyContent: 'space-around'}}>
-                <ApproveRequestModal data={apiData.data}/>
+                <ApproveRequestModal data={rows} request={apiData.data}/>
                 <RejectRequestModal />
             </Box>
             }
