@@ -22,6 +22,8 @@ import StudentRequests from './components/advisor-pages/enrollment/StudentReques
 import RequestPage from './components/advisor-pages/enrollment/requests/RequestPage';
 import AdvisorRequests from './components/pages/advisor/advisorRequests/AdvisorRequests';
 import StudentsEnrolledPage from './components/pages/offeredcourses/StudentsEnrolledPage';
+import SemesterPage from './components/student-pages/SemesterPages/SemesterPage';
+import OldCoursesPage from './components/student-pages/SemesterPages/OldCoursesPage';
 
 
 
@@ -65,6 +67,10 @@ const AppRoutes = () => {
 
                                 <Route element={<RequireAuth allowedRoles={['student']}/>}>
                                         <Route exact path="/enrollmentform" element = {<EnrollmentForm/>} />
+                                        <Route exact path="/students/allsessions" element = {<SemesterPage/>} />
+                                        <Route exact path="/students/sessions/enrolledcourses/:id" element = {<OldCoursesPage/>} />
+
+
                                         
                                 </Route> 
                                 

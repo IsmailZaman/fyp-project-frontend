@@ -6,8 +6,11 @@ const studentNavbarLinks = [
     {
         name: "Profile",
         path: "/profile"
+    },
+    {
+        name: "Semesters",
+        path: "/students/allsessions"
     }
-
 
 
 ]
