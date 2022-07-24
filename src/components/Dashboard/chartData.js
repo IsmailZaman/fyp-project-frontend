@@ -18,5 +18,9 @@ export const popCourses =[
     {
         courseName:'Software Testing',
         noOfRequests: 61
+    },
+    {
+        courseName:'Software Testing',
+        noOfRequests: 61
     }
 ]

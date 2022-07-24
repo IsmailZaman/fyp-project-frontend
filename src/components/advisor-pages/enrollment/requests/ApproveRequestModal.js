@@ -99,6 +99,12 @@ export default function ApproveRequestModal({data, request}) {
         {success !== '' && <DialogContent>
           {success}
         </DialogContent>}
+
+        {submitError !== '' && <DialogContent>
+          {submitError}
+        </DialogContent>}
+
+
       </Dialog>
     </div>
   );

@@ -14,16 +14,24 @@ import background from "./SimpleShiny.png";
 import BarChart from "./Charts/BarChart";
 import PieChart from "./Charts/PieChart";
 import { useState } from "react";
-import Box from '@mui/material/Box';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
+import Box from '@mui/material/Box';
+import Container from '@mui/material/Container';
 
 
 
 
 const AdminDashboard = () => {
+
+
+   const [department,setDepartment ]= useState('Computer Science');
+
+   const [deptId, setDeptId] = useState('62403c677d4a47e233a408e9')
+
+   const [number, setNumber] = useState(3)
     
    const {apiData: studentData, loading: loadingStudentData, error: studentError} = useFetch('/students')
 
@@ -33,22 +41,40 @@ const AdminDashboard = () => {
 
    const {apiData: enrollmentRequestData, loading: loadingEnrollmentRequestData, error: enrollmentRequestError} = useFetch('/requests/unresolved')
 
-   const {apiData: deptData, loading:loadingDeptData , error:deptError } = useFetch('/departments')
+   const {apiData: barChartData, loading: loadingBarChartData, error: barchartError} = useFetch(`/offeredcourse/barchart/${deptId}`)
+   if(barChartData){
+      console.log(barChartData)
+   }
 
-   const [department,setDepartment ]= useState('');
+   const {apiData: deptData} = useFetch('/departments')
+
    
+
+   //For selecting the number of courses to display. Max can be 6.
+
+   const numberOfCourses = [1,2,3,4,5,6]
+
+
+
    const handleChange = (event) => {
       setDepartment(event.target.value);
-    };
+   };
+
+   const handleNumberChange = (event)=>{
+      setNumber(event.target.value)
+   }
+
+   const handleClick = (deptId) =>{
+      setDeptId(deptId)
+   }
   
     return ( 
       <div style={{ backgroundImage: `url(${background})`, backgroundSize:'cover',width: '95%',
-      height: '800px', }}>
+      height: '100vh', }}>
 
         <Layout  navlinks={adminNavbarLinks}>
          
-           <div style={{display: "flex", overflow:"hidden", flexWrap:"wrap"}}>
-            {/* <DashboardCard word="Hello Faieqah"/> */}
+           <div style={{display: "flex", overflow:"hidden", flexWrap:"wrap", justifyContent: 'space-around'}}>
                {/* TOTAL STUDENTS CARD */}
                <Card sx={{p:1, m:5 ,minWidth: 250,maxWidth:300,minHeight:200, display:'flex', flexDirection: 'column', backgroundColor:"#F5F5F5", boxShadow:10}}>
                <br/>
@@ -150,29 +176,62 @@ const AdminDashboard = () => {
                </CardActions>
             </Card>
 
-            <div style={{maxWidth: '600px',minHeight:'380px', minWidth: '600px', maxHeight:'400px'}}> 
-            <FormControl fullWidth>
-         <InputLabel id="demo-simple-select-label">Department</InputLabel>
-            <Select
-               labelId="demo-simple-select-label"
-               id="dept"
-               value={department}
-               onChange={handleChange}
 
-            >
-               {deptData?.data?.map((dept)=>(
-               <MenuItem key={dept.name} value={dept.name}>
-               {dept.name}
-               </MenuItem>
-               ))}
-            </Select>
-         </FormControl>
-            <BarChart />
-            </div>
+         <Container sx={{display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', marginTop: '20px'}}>
 
-            <div style={{maxWidth: '600px',minHeight:'380px', minWidth: '600px', maxHeight:'400px', marginLeft:'30px'}}> 
+            {(loadingBarChartData && !barChartData) && <Loading />}
+            {barChartData && 
+            <div style={{maxWidth: '50%',minHeight:'30%', minWidth: '50%', maxHeight:'40%'}}> 
+            
+               
+                  
+                  <Box sx={{display: 'flex', flexWrap: 'wrap'}}>
+                     
+                        <FormControl sx={{flex: '1', marginRight: '10px'}}>
+                           <InputLabel id="demo-simple-select-label" shrink={false}>{department === '' && <div>Department</div>}</InputLabel>
+                           <Select
+                              labelId="demo-simple-select-label"
+                              id="dept"
+                              value={department}
+                              onChange={handleChange}
+
+                           >
+                              {deptData?.data?.map((dept)=>(
+                              <MenuItem key={dept.name} value={dept.name} onClick={()=>handleClick(dept._id)}>
+                              {dept.name}
+                              </MenuItem>
+                              ))}
+                           </Select>
+                        </FormControl>
+                   
+                     
+                        <FormControl sx={{flex: '0.2', maxHeight: '56px'}}>
+                           <InputLabel id="select-number" shrink={false}>{number === '' && <div>Top</div>}</InputLabel>
+                           <Select
+                              labelId="select-number"
+                              id="number"
+                              value={number}
+                              onChange={handleNumberChange}
+                           >
+                              {numberOfCourses.map((number)=>(
+                              <MenuItem key={number} value={number}>
+                                 <MenuItem key={number} value={number}>
+                                    {number}
+                                 </MenuItem>
+                              </MenuItem>
+                              ))}
+                  
+                           </Select>
+                        </FormControl>
+                     
+                  </Box>
+               <BarChart data={barChartData} />
+            </div>}
+            
+            <div style={{maxWidth: '300px',minHeight:'15%', minWidth: '15%', maxHeight:'15%'}}> 
             <PieChart/>
             </div>
+         </Container>
 
            </div>
            

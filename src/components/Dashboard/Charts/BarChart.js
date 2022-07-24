@@ -1,10 +1,11 @@
 import {Bar} from 'react-chartjs-2';
 import {popCourses} from '../chartData';
 import  {useState} from 'react';
+import useFetch from '../../../hooks/useFetch';
 
 
 
-const BarChart = () => {
+const BarChart = ({data, number}) => {
 
 
     const [chartData, setChartData] = useState({
@@ -25,7 +26,7 @@ const BarChart = () => {
 
 
     return ( <>
-            <Bar data={chartData} options={{maintainAspectRatio:false}} />
+            <Bar data={chartData} options={{maintainAspectRatio: true}} />
 
     </> );
 }

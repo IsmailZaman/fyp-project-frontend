@@ -42,7 +42,7 @@ const PieChart = () => {
     {loading && <Loading />}
      {
         apiData?.data &&
-        <Pie data={data} options={{maintainAspectRatio:false}} />
+        <Pie data={data} options={{maintainAspectRatio:true}} />
     }
     </>);
 }
