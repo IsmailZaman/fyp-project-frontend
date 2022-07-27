@@ -24,6 +24,8 @@ import AdvisorRequests from './components/pages/advisor/advisorRequests/AdvisorR
 import StudentsEnrolledPage from './components/pages/offeredcourses/StudentsEnrolledPage';
 import SemesterPage from './components/student-pages/SemesterPages/SemesterPage';
 import OldCoursesPage from './components/student-pages/SemesterPages/OldCoursesPage';
+import StudentSessionsPage from './components/pages/students/StudentSessionsPage';
+import StudentCoursesPage from './components/pages/students/StudentCoursesPage';
 
 
 
@@ -61,6 +63,9 @@ const AppRoutes = () => {
                                     <Route exact path='/advisors' element ={<Advisor />} />
                                     <Route exact path='/advisors/requests/:advisorId' element ={<AdvisorRequests />} />
                                     <Route exact path ='/offeredcourses/enrolled/students/:id' element = {<StudentsEnrolledPage/>}/>
+                                    <Route exact path ='/students/enrollhistory/sessions/:id' element = {<StudentSessionsPage/>}/>
+                                    <Route exact path ='/students/enrollhistory/courses/:sessionid/:userid' element = {<StudentCoursesPage/>}/>
+
 
                                 </Route>
 

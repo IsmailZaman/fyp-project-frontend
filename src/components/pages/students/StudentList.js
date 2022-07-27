@@ -27,14 +27,31 @@ const renderProfileButton = (params) => {
 }
 
 
+const renderEnrollmentDetailsButton = (params) => {
+  return (
+      <strong>
+          <Button
+              variant="contained"
+              color="primary"
+              size="small"
+              style={{ marginLeft: 16 }}
+              onClick={(e) => {
+                  e.preventDefault();
+                  window.location.href=`http://localhost:5000/students/enrollhistory/sessions/${params?.id}`;
+              }}
+          >
+              Details
+          </Button>
+      </strong>
+  )
+}
+
+
 
 const columns = [
-  { field: 'id', headerName: 'ID', width: 90 },
-  {
-    field: 'Name',
-    headerName: 'Name',
-    width: 150,
-  },
+  { field: 'id', headerName: 'ID', width: 90, flex:0.15},
+  // { field: 'Name', headerName: 'Name', width: 150},
+
   {
     field: 'Email',
     headerName: 'Email',
@@ -54,9 +71,16 @@ const columns = [
     headerName: 'Batch'
   },
   {
-    field: 'profile link',
+    field: 'Profile link',
     width: 150,
     renderCell: renderProfileButton,
+    flex:0.1
+  },
+  {
+    field: 'Enrollment Details',
+    width: 150,
+    renderCell: renderEnrollmentDetailsButton,
+    flex:0.2
   }
 ];
 
@@ -65,11 +89,9 @@ const columns = [
 
 
 export default function StudentDataGrid() {
-  
-
-
 
   const {apiData, loading, error} = useFetch('/students')
+  //const {apiData:enrollementData, loading:loadingEnrollment, error:enrollmentError}= useFetch()
   let rows = []
   
   if(apiData){
@@ -84,7 +106,7 @@ export default function StudentDataGrid() {
     }))
   }
   
-
+  console.log(rows[0])
   return (
     
     <div>
