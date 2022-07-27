@@ -13,7 +13,7 @@ import AddToQueueIcon from '@mui/icons-material/AddToQueue';
 import background from "./SimpleShiny.png";
 import BarChart from "./Charts/BarChart";
 import PieChart from "./Charts/PieChart";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
@@ -26,7 +26,7 @@ import Container from '@mui/material/Container';
 
 const AdminDashboard = () => {
 
-
+   //NEed to be set by default. Otherwise will throw error
    const [department,setDepartment ]= useState('Computer Science');
 
    const [deptId, setDeptId] = useState('62403c677d4a47e233a408e9')
@@ -41,12 +41,17 @@ const AdminDashboard = () => {
 
    const {apiData: enrollmentRequestData, loading: loadingEnrollmentRequestData, error: enrollmentRequestError} = useFetch('/requests/unresolved')
 
-   const {apiData: barChartData, loading: loadingBarChartData, error: barchartError} = useFetch(`/offeredcourse/barchart/${deptId}`)
-   if(barChartData){
-      console.log(barChartData)
-   }
+   const {apiData: barChartData, loading: loadingBarChartData, setRefresh} = useFetch(`/offeredcourse/barchart/${deptId}`)
+   
 
    const {apiData: deptData} = useFetch('/departments')
+
+   useEffect(()=>{
+
+      setRefresh(true)
+      console.log(barChartData)
+
+   },[deptId])
 
    
 
@@ -225,7 +230,7 @@ const AdminDashboard = () => {
                         </FormControl>
                      
                   </Box>
-               <BarChart data={barChartData} />
+               <BarChart data={barChartData} number={number} department={department}/>
             </div>}
             
             <div style={{maxWidth: '300px',minHeight:'15%', minWidth: '15%', maxHeight:'15%'}}> 
