@@ -20,7 +20,8 @@ import { CardMedia } from '@mui/material';
 import logo1 from './logo1.png'
 import ProfileMenu from './ProfileMenu';
 import {useNavigate } from 'react-router-dom';
-import background from "../Dashboard/SimpleShiny.png";
+import NotificationMenu from './NotificationMenu';
+
 
 
 const drawerWidth = 240;
@@ -104,7 +105,9 @@ function Layout(props) {
           <Typography color="secondary" variant="h6" noWrap component="div" sx={{flexGrow: 1}}>
             {title ? title : 'Welcome to ITU'}
           </Typography>
+          <NotificationMenu />
           <ProfileMenu />
+          
         </Toolbar>
       </AppBar>
 
