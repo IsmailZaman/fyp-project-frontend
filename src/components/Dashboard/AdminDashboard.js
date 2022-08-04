@@ -177,7 +177,11 @@ const AdminDashboard = () => {
                   </Typography>
                   </div>
                <CardActions >
-               <Button size="large"  sx={{ color: 'white', backgroundColor: '#3F51B5', borderColor: 'blue' }}>Enrollment requests</Button>
+               <Button size="large"  
+                  onClick={(e) => {
+                     e.preventDefault();
+                     window.location.href=`http://localhost:5000/advisors/`;}}
+               sx={{ color: 'white', backgroundColor: '#3F51B5', borderColor: 'blue' }}>Enrollment requests</Button>
                </CardActions>
             </Card>
 

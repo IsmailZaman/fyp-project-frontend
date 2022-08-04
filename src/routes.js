@@ -29,9 +29,6 @@ import StudentCoursesPage from './components/pages/students/StudentCoursesPage';
 
 
 
-
-
-
 const AppRoutes = () => {
     return ( 
         <div className="App">
@@ -65,8 +62,6 @@ const AppRoutes = () => {
                                     <Route exact path ='/offeredcourses/enrolled/students/:id' element = {<StudentsEnrolledPage/>}/>
                                     <Route exact path ='/students/enrollhistory/sessions/:id' element = {<StudentSessionsPage/>}/>
                                     <Route exact path ='/students/enrollhistory/courses/:sessionid/:userid' element = {<StudentCoursesPage/>}/>
-
-
                                 </Route>
 
 
@@ -74,9 +69,7 @@ const AppRoutes = () => {
                                         <Route exact path="/enrollmentform" element = {<EnrollmentForm/>} />
                                         <Route exact path="/students/allsessions" element = {<SemesterPage/>} />
                                         <Route exact path="/students/sessions/enrolledcourses/:id" element = {<OldCoursesPage/>} />
-
-
-                                        
+                    
                                 </Route> 
                                 
                                 <Route element={<RequireAuth allowedRoles={['advisor','admin']} />}>

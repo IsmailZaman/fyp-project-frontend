@@ -29,7 +29,13 @@ const columns = [
       headerName: 'Department',
       flex: 0.5,
       minWidth: 150,
-  }
+  },
+  {
+    field: 'CreditHours',
+    headerName: 'Credit Hours',
+    flex: 0.5,
+    minWidth: 150,
+}
 ];
 
 const CoursesList = () =>{
@@ -43,7 +49,7 @@ const CoursesList = () =>{
   const [isPending, setPending] = useState(false)
   
 
-  const {apiData, loading, error} = useFetch('/courses')
+  const {apiData, loading, error} = useFetch('/offeredcourse/addcoursepage')
   let rows = []
   
   if(apiData){
@@ -51,7 +57,8 @@ const CoursesList = () =>{
     rows = apiData.data.map((row)=>({
       id: row?._id,
       Name: row?.name,
-      Department: row?.department?.name
+      Department: row?.department,
+      CreditHours: row?.creditHours,
     }))
   }
   const [selectionModel, setSelectionModel] = useState([]);
