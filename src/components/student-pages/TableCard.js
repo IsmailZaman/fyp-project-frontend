@@ -103,7 +103,7 @@ export default function BasicTable() {
                 </TableCell>
                 <TableCell align="right">{row.status}</TableCell>
                 <TableCell align="right">{row.creditHours}</TableCell>
-                {!deadline.data && 
+                {!deadline?.data && 
                 <TableCell align="right">
                   <IconButton tooltip="Description here" onClick={()=>handleClick(row)} sx={{maxWidth: '30px', maxHeight: '30px'}}>
                       <ClearOutlinedIcon/>
