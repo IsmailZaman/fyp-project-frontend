@@ -6,7 +6,6 @@ import StudentCoursesTable from './StudentCoursesTable';
 const StudentCoursesPage = () => {
     const {sessionid, userid} = useParams()
 
-    // console.log(params)
 
        return (  <Layout navlinks={adminNavbarLinks} title = "Student Courses">
        <div> <StudentCoursesTable sID={sessionid} uID={userid} /></div>

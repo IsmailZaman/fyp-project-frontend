@@ -26,7 +26,6 @@ export default function StudentProfileCard(props)
     if(studentData){
         Object.keys(studentData).forEach((key)=>{
             data[key] = studentData[key]
-            console.log(key, studentData[key])
         })
     }
     

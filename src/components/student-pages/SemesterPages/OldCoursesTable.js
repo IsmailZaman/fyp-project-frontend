@@ -11,13 +11,11 @@ const columns = [
 ];
 
 const OldCoursesTable = ({sessionId}) => {
-    console.log(sessionId)
     const {apiData, loading} = useFetch(`/students/sessions/enrolledcourses/${sessionId}`)
 
     let rows =[]
 
     if(apiData){
-        console.log(apiData)
         rows = apiData?.data?.map((row)=>(
             {
                 id: row?._id,

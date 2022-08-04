@@ -5,9 +5,7 @@ import Loading from '../../reusable-components/Loading';
 import { Button } from '@mui/material';
 
 
-
 const renderEnrolledButton = (params) => {
-  console.log(params)
   return (
       <strong>
           <Button
@@ -25,7 +23,6 @@ const renderEnrolledButton = (params) => {
       </strong>
   )
 }
-
 
 const columns = [
     { field: 'id', headerName: 'ID', width: 90 },
@@ -60,20 +57,15 @@ const columns = [
       minWidth: 150,
       renderCell: renderEnrolledButton,
     },
-   
-
   ];
 
-
   
-
   export default function OfferedCoursesGrid() {
   
     const {apiData, loading, error} = useFetch('/offeredcourse/active')
     let rows = []
     
     if(apiData){
-      
       rows = apiData.data.map((row)=>({
         id: row?._id,
         Name: row?.name,
@@ -85,7 +77,6 @@ const columns = [
     }
   
     return (
-      
       <div>
         {(!loading && !error)&&(
         <Box sx={{ height:700}}>

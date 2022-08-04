@@ -37,7 +37,6 @@ export default function DepartmentForm(props) {
 
 
     const onSubmit = async(data) => {
-        console.log(data);
         setError('')
         try{
             setPending(true)
@@ -47,7 +46,6 @@ export default function DepartmentForm(props) {
             setOpen(false)
             setSuccess(true)
         }catch(e){
-            console.log(e)
             setError(e?.response?.data)
         }finally{
             setPending(false)

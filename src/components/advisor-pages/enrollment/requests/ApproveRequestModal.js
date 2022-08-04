@@ -53,7 +53,6 @@ export default function ApproveRequestModal({data, request}) {
       setPending(true)
       setSubmitError('')
       setSuccess('')
-      console.log(request)
 
       const enrolledStudent = await axiosPrivate.post('/semester/enroll', request)
       if(!enrolledStudent) throw new Error('Unable to enroll student.')

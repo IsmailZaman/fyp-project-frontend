@@ -38,7 +38,6 @@ export default function Form(props) {
     };
 
     const onSubmit = async(data) => {
-        console.log(data);
         setError('')
         try{
             setPending(true)
@@ -51,7 +50,6 @@ export default function Form(props) {
             window.location.reload()
             
         }catch(e){
-            console.log(e)
             setError(e?.response?.data)
         }finally{
             setPending(false)

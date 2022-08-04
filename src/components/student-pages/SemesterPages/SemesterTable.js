@@ -6,7 +6,6 @@ import { Button } from '@mui/material';
 
 
 const renderCoursesTakenButton = (params) => {
-    console.log(params)
     return (
         <strong>
             <Button
@@ -48,7 +47,6 @@ const SemesterTable = () => {
     let rows =[]
 
   if(apiData){
-    console.log(apiData)
     rows = apiData?.data?.semesterList.map((row)=>(
         {
             id: row?.Session._id,

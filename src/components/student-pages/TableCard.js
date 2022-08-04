@@ -40,7 +40,6 @@ export default function BasicTable() {
   const handleClick = (row) => {
     setSelected({})
     setSelected(row)
-    console.log(row)
     setOpen(true);
   }
 
@@ -68,7 +67,6 @@ export default function BasicTable() {
 
   if (apiData)
   {
-    console.log(apiData)
     rows=apiData.data.courses.map((d)=>{
       return createData(d.course.name,d.status, d.course.creditHours, d._id)
     })

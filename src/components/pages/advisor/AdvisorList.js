@@ -39,7 +39,6 @@ const renderAssignButton = (params) => {
 
 
 const renderRequestButton = (params) => {
-  console.log(params)
   return (
       <strong>
           <Button

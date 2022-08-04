@@ -6,7 +6,6 @@ import studentNavbarLinks from "../../layout/student-navlinks";
 
 const OldCoursesPage = () => {
     const{id}=useParams()
-    console.log(id)
 
     return (  
         <Layout navlinks={studentNavbarLinks} title = "Session Courses">

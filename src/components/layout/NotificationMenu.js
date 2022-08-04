@@ -30,7 +30,6 @@ export default function NotificationMenu() {
         let temp = [...listOfItemsMarked, id]
         setList([...new Set(temp)])
         setData({...unreadNotifications, data: unreadNotifications.data - 1 });
-        console.log(unreadNotifications.data)
         
     }
 
@@ -44,7 +43,6 @@ export default function NotificationMenu() {
         
         if(listOfItemsMarked.length > 0){
             let x = await axiosPrivate.patch('/notification', listOfItemsMarked)
-            console.log(x)
         }
         setList([])
         

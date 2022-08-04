@@ -79,7 +79,6 @@ export default function BatchForm({update}) {
             setUpdated(!updated)
             setOpen(false)
         }catch(e){
-            console.log(e)
             setError(e?.response?.data)
         }finally{
             setPending(false)

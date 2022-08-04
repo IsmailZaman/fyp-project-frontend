@@ -62,7 +62,6 @@ export default function StudentForm(props) {
             setOpen(false)
             setSuccess(true)
         }catch(e){
-            console.log(e)
             setError(e?.response?.data)
         }finally{
             setPending(false)

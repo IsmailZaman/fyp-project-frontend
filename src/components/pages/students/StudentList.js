@@ -106,7 +106,6 @@ export default function StudentDataGrid() {
     }))
   }
   
-  console.log(rows[0])
   return (
     
     <div>

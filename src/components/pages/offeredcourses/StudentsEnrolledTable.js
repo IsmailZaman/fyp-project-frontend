@@ -27,7 +27,6 @@ const StudentsEnrolledTable = ({courseId}) => {
             batch: row?.batch,
         }
     ))
-    console.log(rows)
     }
     return ( <div>
          <Container sx={{display: 'flex', flexDirection: {xs: 'column', sm: 'column',md: 'column', lg: 'row', xl: 'row'}}}>

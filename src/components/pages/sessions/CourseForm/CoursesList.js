@@ -101,7 +101,6 @@ const CoursesList = () =>{
       setPending(false)
       return navigate("/offeredcourses", { replace: true });
     }catch(e){
-      console.log(e)
       setError(e?.response?.data)
     }finally{
       setPending(false)

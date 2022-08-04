@@ -36,7 +36,6 @@ export default function ProfileForm(props) {
     };
 
     const onSubmit = async(data) => {
-        console.log(data);
         setError('')
         try{
             setPending(true)

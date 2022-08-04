@@ -11,7 +11,6 @@ const useLogout = ()=>{
         try{
             const response = await axiosPrivate.post('/users/logout',{withCredentials: true})
         }catch(e){
-            console.log(e)
         }
     }
     return logout

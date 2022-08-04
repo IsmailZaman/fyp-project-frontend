@@ -10,7 +10,6 @@ const StudentsEnrolledPage =() =>
     
     const{id}=useParams()
     const{auth} = useAuth()
-    //console.log(id)
     return ( <Layout navlinks={auth?.roles?.includes('admin') ? adminNavbarLinks : advisorNavbarLinks} title="Student Requests">
             <StudentsEnrolledTable courseId={id}/>
         </Layout> );

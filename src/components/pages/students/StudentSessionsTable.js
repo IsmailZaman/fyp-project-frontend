@@ -7,7 +7,6 @@ import { Button } from '@mui/material';
 
 
 const renderCoursesTakenButton = (params) => {
-    //console.log(params)
     return (
         <strong>
             <Button
@@ -16,7 +15,6 @@ const renderCoursesTakenButton = (params) => {
                 size="small"
                 style={{ marginLeft: 16 }}
                 onClick={(e) => {
-                    console.log(params)
                     e.preventDefault();
                     window.location.href=`http://localhost:5000/students/enrollhistory/courses/${params?.row?.id}/${params?.row?.userId}`;
                 }}
@@ -44,7 +42,6 @@ const columns = [
 
 const StudentSessionsTable = ({userId}) => {
 
-    //console.log(userId)
     const {apiData, loading} = useFetch(`/students/enrollhistory/sessions/${userId}`)
     let rows =[]
     if(apiData){

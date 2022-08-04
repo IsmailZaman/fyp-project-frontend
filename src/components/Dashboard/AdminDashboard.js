@@ -50,7 +50,6 @@ const AdminDashboard = () => {
    useEffect(()=>{
 
       setRefresh(true)
-      console.log(barChartData)
       
    },[deptId])
 
@@ -78,7 +77,6 @@ const AdminDashboard = () => {
 
 
    const handleChange = (event) => {
-      console.log(event.target.value)
       setDepartment(event.target.value);
    };
 
@@ -87,7 +85,6 @@ const AdminDashboard = () => {
    }
 
    const handleClick = (deptId) =>{
-      console.log(deptId)
       setDeptId(deptId)
    }
   

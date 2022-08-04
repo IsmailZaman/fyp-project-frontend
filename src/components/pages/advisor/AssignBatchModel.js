@@ -52,7 +52,6 @@ export default function AssignBatchModal({row}) {
         setSubmitError('')
         try{
             setPending(true)
-            console.log(batch)
             const assignedBatch = await axiosPrivate.patch(`/advisor/assign/${row.id}`, {batch: batch})
             setPending(false)
             if(assignedBatch){

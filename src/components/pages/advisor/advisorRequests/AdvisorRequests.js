@@ -9,7 +9,6 @@ const AdvisorRequests = () => {
         <Layout navlinks={adminNavbarLinks} >
 
         {<StudentRequestsGrid url={'/advisor/student/requests/'+advisorId} />}
-        {console.log(advisorId)}
 
         
 

@@ -27,7 +27,6 @@ const LoginPage = () => {
         try{
             
             const loginUser = await axiosPrivate.post('/users/login',body)
-            console.log(loginUser)
             setPending(false)
             const accessToken = loginUser?.data?.accessToken
             const user = loginUser?.data?.user
@@ -51,7 +50,6 @@ const LoginPage = () => {
             else{
                 setError('Login Failed')
             }
-            console.log(error)
         }
 
 

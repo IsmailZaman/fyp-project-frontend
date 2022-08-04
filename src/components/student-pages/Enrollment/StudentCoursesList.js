@@ -95,7 +95,6 @@ const StudentCoursesList = () =>{
       const arrayOfIds = selectedCourses.map((course)=>{
         return {'course': course.id}
       })
-      console.log(arrayOfIds)
       
      
       const addedResource = await axiosPrivate.post('/requests/create',{courses: arrayOfIds, creditHours})
@@ -110,7 +109,6 @@ const StudentCoursesList = () =>{
       setPending(false)
       return navigate("/", { replace: true });
     }catch(e){
-      console.log(e)
       setError(e?.response?.data)
     }finally{
       setPending(false)
@@ -141,7 +139,6 @@ const StudentCoursesList = () =>{
             <Typography variant='h5'>Courses Selected: {selectedCourses.length} </Typography>
             <Typography variant='h5'>Total Credit Hours: {creditHours} </Typography>
             
-            {console.log(selectedCourses)}
             
             {submitError !== ''&& <div>{submitError}</div>}
             <EnrollmentTable data={selectedCourses}/>
