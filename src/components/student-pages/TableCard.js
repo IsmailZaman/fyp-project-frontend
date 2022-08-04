@@ -34,6 +34,7 @@ export default function BasicTable() {
   const [isPending, setPending] = useState(false)
   const [isError, setError] = useState('')
   const axiosPrivate = useAxiosPrivate()
+  const {apiData: deadline} = useFetch('/session/deadline')
 
 
   const handleClick = (row) => {
@@ -86,7 +87,7 @@ export default function BasicTable() {
               <TableCell>Course Name</TableCell>
               <TableCell align="right">Status</TableCell>
               <TableCell align="right">Credit Hours</TableCell>
-              <TableCell align="right">Drop</TableCell>
+              {!deadline.data && <TableCell align="right">Drop</TableCell>}
               
               
             </TableRow>
@@ -102,11 +103,13 @@ export default function BasicTable() {
                 </TableCell>
                 <TableCell align="right">{row.status}</TableCell>
                 <TableCell align="right">{row.creditHours}</TableCell>
+                {!deadline.data && 
                 <TableCell align="right">
                   <IconButton tooltip="Description here" onClick={()=>handleClick(row)} sx={{maxWidth: '30px', maxHeight: '30px'}}>
                       <ClearOutlinedIcon/>
                   </IconButton>
-                </TableCell>
+                </TableCell> 
+                }
               </TableRow>
             ))}
           </TableBody>

@@ -20,16 +20,17 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
-
+import useAxiosprivate from "../../hooks/useAxiosPrivate";
 
 
 
 const AdminDashboard = () => {
+   const axiosPrivate = useAxiosprivate()
 
    //NEed to be set by default. Otherwise will throw error
-   const [department,setDepartment ]= useState('Computer Science');
+   const [department,setDepartment ]= useState('');
 
-   const [deptId, setDeptId] = useState('62403c677d4a47e233a408e9')
+   const [deptId, setDeptId] = useState('')
 
    const [number, setNumber] = useState(3)
     
@@ -44,14 +45,29 @@ const AdminDashboard = () => {
    const {apiData: barChartData, loading: loadingBarChartData, setRefresh} = useFetch(`/offeredcourse/barchart/${deptId}`)
    
 
-   const {apiData: deptData} = useFetch('/departments')
+   const [deptData,setDeptData] = useState([])
 
    useEffect(()=>{
 
       setRefresh(true)
       console.log(barChartData)
-
+      
    },[deptId])
+
+
+   useEffect(()=>{
+
+      const getDept = async function(){
+         const dept =  await axiosPrivate.get('/departments')
+         setDeptData(dept.data)
+         if(dept?.data?.length < 3){
+            setNumber(0)
+         }
+         setDepartment(dept?.data?.[0]?.name)
+         setDeptId(dept?.data?.[0]._id)
+      }
+      getDept()
+   },[])
 
    
 
@@ -62,6 +78,7 @@ const AdminDashboard = () => {
 
 
    const handleChange = (event) => {
+      console.log(event.target.value)
       setDepartment(event.target.value);
    };
 
@@ -70,6 +87,7 @@ const AdminDashboard = () => {
    }
 
    const handleClick = (deptId) =>{
+      console.log(deptId)
       setDeptId(deptId)
    }
   
@@ -189,7 +207,7 @@ const AdminDashboard = () => {
          <Container sx={{display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', marginTop: '20px'}}>
 
             {(loadingBarChartData && !barChartData) && <Loading />}
-            {barChartData && 
+            {(barChartData) &&
             <div style={{maxWidth: '50%',minHeight:'30%', minWidth: '50%', maxHeight:'40%'}}> 
             
                
@@ -205,7 +223,7 @@ const AdminDashboard = () => {
                               onChange={handleChange}
 
                            >
-                              {deptData?.data?.map((dept)=>(
+                              {deptData?.map((dept)=>(
                               <MenuItem key={dept.name} value={dept.name} onClick={()=>handleClick(dept._id)}>
                               {dept.name}
                               </MenuItem>
@@ -224,9 +242,9 @@ const AdminDashboard = () => {
                            >
                               {numberOfCourses.map((number)=>(
                               <MenuItem key={number} value={number}>
-                                 <MenuItem key={number} value={number}>
-                                    {number}
-                                 </MenuItem>
+               
+                                 {number}
+                                 
                               </MenuItem>
                               ))}
                   
@@ -234,7 +252,8 @@ const AdminDashboard = () => {
                         </FormControl>
                      
                   </Box>
-               <BarChart data={barChartData} number={number} department={department}/>
+               {loadingBarChartData  && <Loading />}
+               {!loadingBarChartData &&<BarChart data={barChartData} number={number} department={department}/>}
             </div>}
             
             <div style={{maxWidth: '300px',minHeight:'15%', minWidth: '15%', maxHeight:'15%'}}> 

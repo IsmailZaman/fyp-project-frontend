@@ -30,7 +30,7 @@ const useFetch = (url) => {
         
     },[url, refresh])
 
-    return {apiData: data,loading,error, setRefresh}
+    return {apiData: data,loading,error, setData ,setRefresh}
 
 
 

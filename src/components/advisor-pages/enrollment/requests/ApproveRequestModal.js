@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
@@ -6,6 +6,7 @@ import DialogTitle from '@mui/material/DialogTitle';
 import useAxiosprivate from '../../../../hooks/useAxiosPrivate';
 import { DialogContent } from '@mui/material';
 import Loading from '../../../reusable-components/Loading';
+import { DataContext } from '../../../../context/DataContext';
 
 
 export default function ApproveRequestModal({data, request}) {
@@ -14,6 +15,7 @@ export default function ApproveRequestModal({data, request}) {
   const [submitError,setSubmitError] = useState('')
   const [success, setSuccess] = useState('')
   const [isPending, setPending] = useState(false)
+  const {notificationUpdated} = useContext(DataContext)
 
   const axiosPrivate = useAxiosprivate()
   const handleClickOpen = () => {
@@ -58,6 +60,7 @@ export default function ApproveRequestModal({data, request}) {
 
       if(enrolledStudent){
         setSuccess(enrolledStudent.data)
+        notificationUpdated()
       }
     }catch(e){
       setSubmitError(e?.response?.data)

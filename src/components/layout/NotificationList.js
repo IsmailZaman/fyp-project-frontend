@@ -5,7 +5,17 @@ import ListItemText from '@mui/material/ListItemText';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box'
 
-export default function NotificationsList({data}) {
+
+
+export default function NotificationsList({data, markAsRead}) {
+
+  const bgColors = {
+    seen: 'lightblue',
+    notSeen: 'white'
+  }
+
+ 
+
   return (
     <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
 
@@ -17,7 +27,24 @@ export default function NotificationsList({data}) {
 
 
       {data.length > 0 && data.map((data)=>(
-        <Box key={data._id}>
+        <Box key={data._id}
+        onClick={()=>{
+          if(!data.seen){
+          markAsRead(data._id)
+          data.seen = true
+          }
+        }}
+        sx={{
+          marginLeft: '10px',
+          marginRight: '10px',
+          borderRadius: '12px',
+          backgroundColor: data.seen ? bgColors['notSeen'] : bgColors['seen'],
+          '&:hover':{
+            opacity: '0.7',
+            cursor: 'pointer'
+          }
+        }}
+        >
             <Divider variant="inset" component="li"/>
             <ListItem alignItems="flex-start">
                 <ListItemText

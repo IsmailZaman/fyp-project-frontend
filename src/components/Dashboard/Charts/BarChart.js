@@ -31,7 +31,7 @@ const BarChart = ({data, number, department}) => {
 
       setUpdated(true)
 
-   },[number,data])
+   },[number,data,department])
 
    const [dataUpdated, setUpdated] = useState(false)
    const [chartData, setChartData] = useState({})
