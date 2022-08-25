@@ -22,6 +22,8 @@ export default function StudentProfileCard(props)
     delete data?.createdBy
     delete data?.createdAt
     delete data?.updatedAt
+    delete data?.transcript
+    delete data?.userId
     
     if(studentData){
         Object.keys(studentData).forEach((key)=>{

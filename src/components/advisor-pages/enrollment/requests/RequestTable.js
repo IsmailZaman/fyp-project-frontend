@@ -84,6 +84,7 @@ const columns = [
 export default function RequestTable({requestId}) {
     
     const {apiData, loading} = useFetch(`/requests/${requestId}`)
+    console.log(apiData)
     const{auth} = useAuth()
 
     let rows =[]
@@ -125,7 +126,7 @@ export default function RequestTable({requestId}) {
             {auth?.roles?.includes('advisor') &&
             <Box sx={{display: 'flex', justifyContent: 'space-around'}}>
                 <ApproveRequestModal data={rows} request={apiData.data}/>
-                <RejectRequestModal />
+                <RejectRequestModal studentId={apiData?.data?.student}/>
             </Box>
             }
         </Box>

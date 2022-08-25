@@ -11,6 +11,7 @@ import useAxiosprivate from '../../../../hooks/useAxiosPrivate';
 import { useNavigate } from "react-router-dom";
 import { useContext } from 'react';
 import { DataContext } from '../../../../context/DataContext';
+import { GridToolbar } from '@mui/x-data-grid';
 
 
 
@@ -121,6 +122,9 @@ const CoursesList = () =>{
         }}
         selectionModel={selectionModel}
         columns={columns} rows={rows}
+        components={{
+          Toolbar: GridToolbar,
+        }}
       />
         </Box>}
         {loading && <Loading/>}

@@ -12,34 +12,97 @@ import { useNavigate } from "react-router-dom";
 import { useContext } from 'react';
 import { DataContext } from '../../../context/DataContext';
 import EnrollmentTable from './EnrollmentTable';
+import { GridToolbar } from '@mui/x-data-grid';
+import PrereqModal from './PrereqModal';
 
 
 
 
+const preReqsCompleted = (prereqs, transcript,courseid) =>{
+  let completed = true
+  let preReqData = []
 
-const columns = [
-  { field: 'id', headerName: 'ID', width: 90 },
-  {
-    field: 'Name',
-    headerName: 'Name',
-    flex: 0.5,
-    minWidth: 150,
-  },
-  {
-      field: 'Department',
-      headerName: 'Department',
-      flex: 0.5,
-      minWidth: 150,
-  },
-  {
-    field: 'creditHours',
-    headerName: 'Credit Hours',
-    flex: 0.5,
-    minWidth: 150,
+  for(let i =0;i<prereqs.length; i++){
+    let match = false
+    for(let j =0; j<transcript.length; j++){
+      if(transcript[j].course === courseid){
+        console.log('hello')
+        preReqData.push(transcript[j])
+      }
+      if(prereqs[i] === transcript[j].course){
+        match = true
+        preReqData.push(transcript[j])
+        if(transcript[j].grade === "F" || transcript[j].grade === "NA"){
+          completed = false
+        }
+      }
+    }
+    if(match === false) completed = false
+  }
+  return {completed, preReqData}
 }
-];
+
+
 
 const StudentCoursesList = () =>{
+
+  const[row, setRow] = useState({});
+  const renderPrereqButton = (params, handleOpen, handleClose, open) => {
+  
+  
+    return (
+      <>
+        <strong>
+            <Button
+                href="#text-buttons"
+                sx={{ margin: 'auto', height: '100%', color: params.row.completed ? '#65a17c' : 'red' }}
+                onClick={()=> {
+                  setRow(params.row)
+                  handleOpen()
+                }}
+            >
+                pre-requisite Info
+            </Button>
+          </strong>
+  
+          <PrereqModal handleClose={handleClose} open={open} params={row} />
+        </>
+    )
+  }
+
+
+
+
+
+  const columns = [
+    { field: 'id', headerName: 'ID', width: 90 },
+    {
+      field: 'Name',
+      headerName: 'Name',
+      flex: 0.5,
+      minWidth: 150,
+    },
+    {
+        field: 'Department',
+        headerName: 'Department',
+        flex: 0.5,
+        minWidth: 150,
+    },
+    {
+      field: 'creditHours',
+      headerName: 'Credit Hours',
+      flex: 0.5,
+      minWidth: 150,
+    }, 
+    {
+      field: 'addprereq',
+      headerName: 'add prereqs',
+      width: 150,
+      renderCell: (params)=>renderPrereqButton(params, handleOpen, handleClose, open),
+      flex:0.5
+    }
+
+  ];
 
   const axiosPrivate = useAxiosprivate()
   const navigate = useNavigate()
@@ -47,19 +110,28 @@ const StudentCoursesList = () =>{
   const [submitError,setError] = useState('')
   const [isPending, setPending] = useState(false)
   const[creditHours, setCreditHours] = useState(0)
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
   
 
   const {apiData, loading, error} = useFetch('/offeredcourse/enrollment')
   let rows = []
+  let transcript = []
   
   if(apiData){
-    
-    rows = apiData.data.map((row)=>({
+    console.log(apiData)
+    transcript = apiData?.data?.transcript
+    rows = apiData?.data?.filteredCourses.map((row)=>({
       id: row?._id,
       Name: row?.name,
-      Department: row?.data?.department?.name,
-      creditHours: row?.creditHours
+      Department: row?.department,
+      creditHours: row?.creditHours,
+      prereq: row?.prereqs,
+      completed: preReqsCompleted(row.prereqs, transcript,row._id, row?.dataId)?.completed,
+      userPrereqHistory: preReqsCompleted(row.prereqs, transcript, row?.dataId)?.preReqData
     }))
+
   }
   const [selectionModel, setSelectionModel] = useState([]);
   const [selectedCourses, setSelectedCourses] = useState([]);
@@ -75,7 +147,7 @@ const StudentCoursesList = () =>{
     let selectedCourseArray =[];
     let hours = 0
     selectedCoursesArray.forEach(elementID => {
-      if(rowMap[elementID]) {
+      if(rowMap[elementID]?.completed) {
         selectedCourseArray.push(rowMap[elementID]);
         hours = hours + rowMap[elementID]?.creditHours
       }
@@ -126,6 +198,9 @@ const StudentCoursesList = () =>{
           courseSelection(newSelectionModel);
           setSelectionModel(newSelectionModel);
           
+        }}
+        components={{
+          Toolbar: GridToolbar,
         }}
         selectionModel={selectionModel}
         columns={columns} rows={rows}
