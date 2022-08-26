@@ -10,6 +10,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import Loading from '../../../reusable-components/Loading';
 
 const style = {
   position: 'absolute',
@@ -48,6 +49,7 @@ export default function RejectRequestModal({studentId}) {
           aria-describedby="modal-modal-description"
         >   
           <Box sx={style}>
+            {loading && <Loading />}
             {apiData?.data?.length > 0 && (
                     <TableContainer component={Paper}>
                     <Table sx={{ minWidth: '400' }} aria-label="simple table">

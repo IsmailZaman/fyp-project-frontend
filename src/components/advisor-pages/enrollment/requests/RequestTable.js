@@ -10,6 +10,8 @@ import IconButton from '@mui/material/IconButton';
 import ClearOutlinedIcon from '@mui/icons-material/ClearOutlined';
 import TaskAltIcon from '@mui/icons-material/TaskAlt';
 import useAuth from '../../../../hooks/useAuth';
+import { useState } from 'react';
+import StudentPrereqModal from './StudentPrereqModal'
 
 const renderRejectButton = (params) => {
   
@@ -59,29 +61,57 @@ const renderAcceptButton = (params) => {
 
 
 
-const columns = [
-  { field: 'name', headerName: 'Course name', flex: 1 },
-  { field: 'department', headerName: 'Department', flex: 0.5 },
-  { field: 'creditHours', headerName: 'Credit hours', flex: 0.5 },
-  { field: 'status', headerName: 'Status', flex: 0.5 },
-  {
-    field: 'reject',
-    flex: 0.5,
-    renderCell: renderAcceptButton,
-  },
-
-  {
-    field: 'accept',
-    flex: 0.5,
-    renderCell: renderRejectButton,
-  }
-  
-];
-
-
-
 
 export default function RequestTable({requestId}) {
+
+    const [open, setOpen] = useState(false);
+    const handleOpen = () => setOpen(true);
+    const handleClose = () => setOpen(false);
+
+    const[row, setRow] = useState({});
+    const renderPrereqButton = (params, handleOpen, handleClose, open) => {
+  
+  
+        return (
+          <>
+            <strong>
+                <Box onClick={()=> {
+                  setRow(params.row)
+                  handleOpen()
+                }}
+>
+                    {params?.row?.name}
+                </Box>
+              </strong>
+
+              <StudentPrereqModal handleClose={handleClose} open={open} params={row} />
+            </>
+        )
+      }
+    
+    
+    const columns = [
+      { field: 'name',
+       headerName: 'Course name', 
+       flex: 1,
+       renderCell: (params)=>renderPrereqButton(params,handleOpen, handleClose, open)
+      },
+      { field: 'department', headerName: 'Department', flex: 0.5 },
+      { field: 'creditHours', headerName: 'Credit hours', flex: 0.5 },
+      { field: 'status', headerName: 'Status', flex: 0.5 },
+      {
+        field: 'reject',
+        flex: 0.5,
+        renderCell: renderAcceptButton,
+      },
+    
+      {
+        field: 'accept',
+        flex: 0.5,
+        renderCell: renderRejectButton,
+      }
+      
+    ];
     
     const {apiData, loading} = useFetch(`/requests/${requestId}`)
     console.log(apiData)
@@ -90,6 +120,7 @@ export default function RequestTable({requestId}) {
     let rows =[]
 
     if(apiData){
+        console.log('apidata', apiData)
         rows = apiData?.data?.courses?.map((row)=>(
             {
                 id: row?.course?._id,
@@ -97,6 +128,8 @@ export default function RequestTable({requestId}) {
                 creditHours: row?.course?.creditHours,
                 department: row?.course?.data?.department?.name,
                 status: row?.status,
+                prereq: row?.course?.data?.prereqs,
+                student: apiData?.data?.student
             }
         ))
         

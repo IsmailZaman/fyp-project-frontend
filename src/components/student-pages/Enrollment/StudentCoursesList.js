@@ -21,24 +21,33 @@ import PrereqModal from './PrereqModal';
 const preReqsCompleted = (prereqs, transcript,courseid) =>{
   let completed = true
   let preReqData = []
+  let grades = {}
+  let match = false
 
-  for(let i =0;i<prereqs.length; i++){
-    let match = false
-    for(let j =0; j<transcript.length; j++){
-      if(transcript[j].course === courseid){
-        console.log('hello')
-        preReqData.push(transcript[j])
-      }
-      if(prereqs[i] === transcript[j].course){
-        match = true
-        preReqData.push(transcript[j])
-        if(transcript[j].grade === "F" || transcript[j].grade === "NA"){
-          completed = false
+  if(prereqs.length === 0) return{completed, preReqData}
+
+  for(let i =0 ;i<prereqs.length; i++){
+    match = false
+    for(let j = 0; j< transcript.length; j++){
+        if(transcript[j].course === prereqs[i]){
+          match = true
+          preReqData.push(transcript[j])
+          if(grades[prereqs[i]]){
+            if(grades[prereqs[i]] === "NA" || grades[prereqs[i]] === "F"){
+              grades[prereqs[i]] = transcript[j].grade
+            }
+          }else{
+            grades[prereqs[i]] = transcript[j].grade
+          }
         }
-      }
     }
-    if(match === false) completed = false
+    if(!match)grades[prereqs[i]] = "E"
   }
+  console.log('id',courseid,'course grades',grades)
+  for(const k in grades){
+    if(grades[k] === "F" || grades[k] === "E" || grades[k] === "NA") completed = false
+  }
+
   return {completed, preReqData}
 }
 
