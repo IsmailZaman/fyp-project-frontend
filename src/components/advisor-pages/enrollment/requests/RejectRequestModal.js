@@ -27,7 +27,6 @@ const style = {
 export default function RejectRequestModal({studentId}) {
   const [open, setOpen] = useState(false);
   const {apiData, loading} = useFetch(`/students/transcript/${studentId}`)
-  if(apiData) console.log(apiData.data)
 
   const handleClickOpen = () => {
     setOpen(true);

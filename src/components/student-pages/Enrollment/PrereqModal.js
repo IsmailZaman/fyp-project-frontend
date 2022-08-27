@@ -58,7 +58,6 @@ const PrereqModal = ({open,handleClose, params}) => {
             }
             if(!found) course['grade'] = "Not taken yet"
         })
-        console.log(apiData)
     }
 
     return ( <div>

@@ -114,13 +114,11 @@ export default function RequestTable({requestId}) {
     ];
     
     const {apiData, loading} = useFetch(`/requests/${requestId}`)
-    console.log(apiData)
     const{auth} = useAuth()
 
     let rows =[]
 
     if(apiData){
-        console.log('apidata', apiData)
         rows = apiData?.data?.courses?.map((row)=>(
             {
                 id: row?.course?._id,

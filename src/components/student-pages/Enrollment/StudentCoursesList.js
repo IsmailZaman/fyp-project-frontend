@@ -43,7 +43,6 @@ const preReqsCompleted = (prereqs, transcript,courseid) =>{
     }
     if(!match)grades[prereqs[i]] = "E"
   }
-  console.log('id',courseid,'course grades',grades)
   for(const k in grades){
     if(grades[k] === "F" || grades[k] === "E" || grades[k] === "NA") completed = false
   }
@@ -129,7 +128,6 @@ const StudentCoursesList = () =>{
   let transcript = []
   
   if(apiData){
-    console.log(apiData)
     transcript = apiData?.data?.transcript
     rows = apiData?.data?.filteredCourses.map((row)=>({
       id: row?._id,

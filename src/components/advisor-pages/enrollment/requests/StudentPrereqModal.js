@@ -45,9 +45,6 @@ const StudentPrereqModal = ({open,handleClose, params}) => {
 
 
 
-    if(apiData){
-        console.log(apiData)
-    }
 
     return ( <div>
         <Modal
