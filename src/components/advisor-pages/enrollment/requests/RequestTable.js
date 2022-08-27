@@ -129,6 +129,7 @@ export default function RequestTable({requestId}) {
                 department: row?.course?.data?.department?.name,
                 status: row?.status,
                 prereq: row?.course?.data?.prereqs,
+                courseId: row?.course?.data?._id,
                 student: apiData?.data?.student
             }
         ))

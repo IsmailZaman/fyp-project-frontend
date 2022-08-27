@@ -45,6 +45,7 @@ export default function DepartmentForm(props) {
             setMsg(addedResource.data)
             setOpen(false)
             setSuccess(true)
+            window.location.reload()
         }catch(e){
             setError(e?.response?.data)
         }finally{

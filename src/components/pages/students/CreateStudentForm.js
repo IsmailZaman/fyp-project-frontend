@@ -61,6 +61,7 @@ export default function StudentForm(props) {
             setMsg(addedResource.data)
             setOpen(false)
             setSuccess(true)
+            window.location.reload()
         }catch(e){
             setError(e?.response?.data)
         }finally{

@@ -78,6 +78,7 @@ export default function BatchForm({update}) {
             setPending(false)
             setUpdated(!updated)
             setOpen(false)
+            window.location.reload();
         }catch(e){
             setError(e?.response?.data)
         }finally{

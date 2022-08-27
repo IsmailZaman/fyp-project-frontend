@@ -57,6 +57,7 @@ export default function CourseForm(props) {
             setMsg(addedResource.data)
             setOpen(false)
             setSuccess(true)
+            window.location.reload();
         }catch(e){
             setError(e?.response?.data)
         }finally{
